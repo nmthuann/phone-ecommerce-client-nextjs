@@ -1,0 +1,50 @@
+[
+    {
+        "question": "Cửa hàng tạp hóa của bạn mở cửa vào lúc mấy giờ?",
+        "answer": "Cửa hàng mở cửa từ 7 giờ sáng đến 9 giờ tối mỗi ngày."
+    },
+    {
+        "question": "Có những loại sản phẩm nào được bán tại cửa hàng?",
+        "answer": "Chúng tôi cung cấp đa dạng sản phẩm như thực phẩm, đồ uống, đồ gia dụng, và nhiều sản phẩm khác."
+    },
+    {
+        "question": "Có dịch vụ giao hàng không?",
+        "answer": "Có, chúng tôi cung cấp dịch vụ giao hàng trong khu vực thành phố. Bạn có thể đặt hàng qua điện thoại hoặc website."
+    },
+    {
+        "question": "Có chương trình khuyến mãi nào không?",
+        "answer": "Chúng tôi thường xuyên có chương trình khuyến mãi. Hãy theo dõi trang web hoặc trang mạng xã hội của chúng tôi để cập nhật thông tin."
+    },
+    {
+        "question": "Làm thế nào để thanh toán?",
+        "answer": "Chúng tôi chấp nhận nhiều hình thức thanh toán, bao gồm tiền mặt, thẻ tín dụng, và thanh toán qua ví điện tử."
+    },
+    {
+        "question": "Cửa hàng có chấp nhận trả hàng không?",
+        "answer": "Có, bạn có thể trả hàng trong vòng 7 ngày nếu sản phẩm còn nguyên vẹn và có hóa đơn mua hàng."
+    },
+    {
+        "question": "Có thể liên hệ với cửa hàng qua đâu?",
+        "answer": "Bạn có thể liên hệ qua số điện thoại 0123-456-789 hoặc gửi email đến info@cuahangtaphoa.com."
+    },
+    {
+        "question": "Cửa hàng có bán sản phẩm hữu cơ không?",
+        "answer": "Có, chúng tôi có một lựa chọn sản phẩm hữu cơ như trái cây, rau củ, và thực phẩm chế biến sẵn."
+    },
+    {
+        "question": "Có thể tìm thấy sản phẩm ở đâu trong cửa hàng?",
+        "answer": "Sản phẩm được sắp xếp theo danh mục, bạn có thể tìm thấy thực phẩm ở khu vực bên trái và đồ gia dụng ở khu vực bên phải."
+    },
+    {
+        "question": "Cửa hàng có cung cấp thẻ thành viên không?",
+        "answer": "Có, bạn có thể đăng ký thẻ thành viên để nhận được nhiều ưu đãi và khuyến mãi."
+    },
+    {
+        "question": "Có thể đặt hàng trước và nhận hàng tại cửa hàng không?",
+        "answer": "Có, bạn có thể đặt hàng trực tuyến và chọn phương thức nhận hàng tại cửa hàng để tiết kiệm thời gian."
+    },
+    {
+        "question": "Cửa hàng có cung cấp sản phẩm cho doanh nghiệp không?",
+        "answer": "Có, chúng tôi có dịch vụ bán buôn cho các doanh nghiệp và cửa hàng khác. Hãy liên hệ với chúng tôi để biết thêm chi tiết."
+    }
+]
