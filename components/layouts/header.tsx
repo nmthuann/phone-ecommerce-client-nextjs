@@ -6,6 +6,7 @@ import SearchBar from '../modules/search/search-bar'
 import { Button } from '@heroui/react'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
+import { ThemeToggle } from './theme-toggle'
 
 const insights: string[] = [
   '1000+ Sản phẩm đa dạng 🛒',
@@ -46,12 +47,13 @@ export const Header: React.FC = () => {
 
           {/* NÚT ĐĂNG NHẬP & GIỎ HÀNG */}
           <div className='flex space-x-4'>
-            <Button startContent={<User2 />} variant='light'>
+            <Button startContent={<User2 />} variant='light' className='text-slate-700 dark:text-slate-400'>
               Đăng nhập
             </Button>
-            <Button startContent={<LucideShoppingBag />} variant='light'>
+            <Button startContent={<LucideShoppingBag />} variant='light' className='text-slate-700 dark:text-slate-400'>
               Giỏ hàng
             </Button>
+            <ThemeToggle />
           </div>
         </div>
 
@@ -63,7 +65,7 @@ export const Header: React.FC = () => {
               href={category.href}
               className={cn(
                 'text-base font-medium transition-colors hover:text-red-600',
-                pathname === category.href ? 'text-red-600 font-bold' : 'text-neutral-500'
+                pathname === category.href ? 'text-red-600 font-bold' : 'text-slate-700 dark:text-slate-400'
               )}
             >
               {category.label}
