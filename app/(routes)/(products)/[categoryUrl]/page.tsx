@@ -7,25 +7,24 @@ import Loading from './loading'
 import CategoryExplorer from './components/category-explorer'
 import { getCategories } from '@/actions/get-categories'
 import { getBrands } from '@/actions/get-brands'
+import { getProducts } from '@/actions/get-products'
 
 const CategoryPage = async ({ params }: { params: Promise<{ categoryUrl: string }> }) => {
   const { categoryUrl } = await params
-
+  console.log('categoryUrl:::', categoryUrl)
   if (!categoryUrl) {
     return <NotFoundComponent />
   }
   try {
     const categories = await getCategories()
     const brands = await getBrands()
-    // const findCategory = categories.find(cat => cat.categoryUrl === `/${categoryUrl}`)
+    const products = await getProducts(categoryUrl, 'apple', 1, 5)
 
-    // let productCards: ProductResponse[] = []
-    if (categoryUrl) {
-      //productCards = await getProductsByCategory(findCategory.categoryName)
+    if (categories) {
       return (
         <div>
           <Suspense fallback={<Loading />}>
-            <CategoryExplorer brands={brands} cats={categories} />
+            <CategoryExplorer brands={brands} cats={categories} products={products} />
           </Suspense>
           <Divider />
           <Footer />

@@ -1,162 +1,106 @@
-[
-    {
-        "name": "iPhone 15 Pro Max",
-        "slug": "/iphone-15-pro-max",
-        "skus": [
-            {
-                "newPrice": 1099,
-                "oldPrice": 1199,
-                "sold": 150,
-                "rating": 4.8,
-                "images": [
-                    "https://res.cloudinary.com/ddyreawwf/image/upload/v1732779960/no-image_ur9qsg.jpg"
-                ],
-                "variants": {
-                    "color": "Black",
-                    "storage": "128GB"
+{
+    "data": [
+        {
+            "id": 1,
+            "productName": "iPhone 15 Pro Max",
+            "slug": "/iphone-15-pro-max",
+            "categoryName": "Điện thoại",
+            "categoryUrl": "/dien-thoai",
+            "brandName": "Apple",
+            "brandUrl": "/apple",
+            "skus": [
+                {
+                    "id": 1,
+                    "skuName": "iPhone 15 Pro Max 128GB Black",
+                    "image": "https://res.cloudinary.com/ddyreawwf/image/upload/v1732779960/no-image_ur9qsg.jpg",
+                    "slug": "/iphone-15-pro-max-128gb-black",
+                    "skuAttributes": [
+                        {
+                            "key": "color",
+                            "value": "Black"
+                        },
+                        {
+                            "key": "storage",
+                            "value": "128GB"
+                        }
+                    ],
+                    "sellingPrice": 28990000,
+                    "displayPrice": 30990000
+                },
+                {
+                    "id": 2,
+                    "skuName": "iPhone 15 Pro Max 256GB Silver",
+                    "image": "https://res.cloudinary.com/ddyreawwf/image/upload/v1732779960/no-image_ur9qsg.jpg",
+                    "slug": "/iphone-15-pro-max-256gb-silver",
+                    "skuAttributes": [
+                        {
+                            "key": "color",
+                            "value": "Silver"
+                        },
+                        {
+                            "key": "storage",
+                            "value": "256GB"
+                        }
+                    ],
+                    "sellingPrice": 31500000,
+                    "displayPrice": 33070000
                 }
-            },
-            {
-                "newPrice": 1199,
-                "oldPrice": 1299,
-                "sold": 200,
-                "rating": 4.9,
-                "images": [
-                    "https://res.cloudinary.com/ddyreawwf/image/upload/v1732779960/no-image_ur9qsg.jpg"
-                ],
-                "variants": {
-                    "color": "Silver",
-                    "storage": "256GB"
+            ]
+        },
+        {
+            "id": 2,
+            "productName": "iPhone 14",
+            "slug": "/iphone-14",
+            "categoryName": "Điện thoại",
+            "categoryUrl": "/dien-thoai",
+            "brandName": "Apple",
+            "brandUrl": "/apple",
+            "skus": [
+                {
+                    "id": 3,
+                    "skuName": "iPhone 14 128GB Black",
+                    "image": "https://res.cloudinary.com/ddyreawwf/image/upload/v1732779960/no-image_ur9qsg.jpg",
+                    "slug": "/iphone-14-128gb-black",
+                    "skuAttributes": [
+                        {
+                            "key": "color",
+                            "value": "Black"
+                        },
+                        {
+                            "key": "storage",
+                            "value": "128GB"
+                        }
+                    ],
+                    "sellingPrice": 18599000,
+                    "displayPrice": 20500000
+                },
+                {
+                    "id": 4,
+                    "skuName": "iPhone 14 256GB Red",
+                    "image": "https://res.cloudinary.com/ddyreawwf/image/upload/v1732779960/no-image_ur9qsg.jpg",
+                    "slug": "/iphone-14-256gb-red",
+                    "skuAttributes": [
+                        {
+                            "key": "color",
+                            "value": "Red"
+                        },
+                        {
+                            "key": "storage",
+                            "value": "256GB"
+                        }
+                    ],
+                    "sellingPrice": 22869000,
+                    "displayPrice": 22500000
                 }
-            }
-        ]
-    },
-    {
-        "name": "iPhone 14",
-        "slug": "/iphone-14",
-        "skus": [
-            {
-                "newPrice": 899,
-                "oldPrice": 999,
-                "sold": 180,
-                "rating": 4.7,
-                "images": [
-                    "https://res.cloudinary.com/ddyreawwf/image/upload/v1732779960/no-image_ur9qsg.jpg"
-                ],
-                "variants": {
-                    "color": "Black",
-                    "storage": "128GB"
-                }
-            },
-            {
-                "newPrice": 999,
-                "oldPrice": 1099,
-                "sold": 220,
-                "rating": 4.8,
-                "images": [
-                    "https://res.cloudinary.com/ddyreawwf/image/upload/v1732779960/no-image_ur9qsg.jpg"
-                ],
-                "variants": {
-                    "color": "Red",
-                    "storage": "256GB"
-                }
-            }
-        ]
-    },
-    {
-        "name": "Samsung Galaxy S24 Ultra",
-        "slug": "/samsung-galaxy-s24-ultra",
-        "skus": [
-            {
-                "newPrice": 1199,
-                "oldPrice": 1299,
-                "sold": 250,
-                "rating": 4.9,
-                "images": [
-                    "https://res.cloudinary.com/ddyreawwf/image/upload/v1732779960/no-image_ur9qsg.jpg"
-                ],
-                "variants": {
-                    "color": "Black",
-                    "storage": "256GB"
-                }
-            },
-            {
-                "newPrice": 1299,
-                "oldPrice": 1399,
-                "sold": 300,
-                "rating": 5.0,
-                "images": [
-                    "https://res.cloudinary.com/ddyreawwf/image/upload/v1732779960/no-image_ur9qsg.jpg"
-                ],
-                "variants": {
-                    "color": "White",
-                    "storage": "512GB"
-                }
-            }
-        ]
-    },
-    {
-        "name": "Xiaomi 13 Pro",
-        "slug": "/xiaomi-13-pro",
-        "skus": [
-            {
-                "newPrice": 999,
-                "oldPrice": 1099,
-                "sold": 140,
-                "rating": 4.7,
-                "images": [
-                    "https://res.cloudinary.com/ddyreawwf/image/upload/v1732779960/no-image_ur9qsg.jpg"
-                ],
-                "variants": {
-                    "color": "Black",
-                    "storage": "256GB"
-                }
-            },
-            {
-                "newPrice": 1099,
-                "oldPrice": 1199,
-                "sold": 180,
-                "rating": 4.8,
-                "images": [
-                    "https://res.cloudinary.com/ddyreawwf/image/upload/v1732779960/no-image_ur9qsg.jpg"
-                ],
-                "variants": {
-                    "color": "Green",
-                    "storage": "512GB"
-                }
-            }
-        ]
-    },
-    {
-        "name": "Vivo X90 Pro",
-        "slug": "/vivo-x90-pro",
-        "skus": [
-            {
-                "newPrice": 899,
-                "oldPrice": 999,
-                "sold": 130,
-                "rating": 4.6,
-                "images": [
-                    "https://res.cloudinary.com/ddyreawwf/image/upload/v1732779960/no-image_ur9qsg.jpg"
-                ],
-                "variants": {
-                    "color": "Black",
-                    "storage": "256GB"
-                }
-            },
-            {
-                "newPrice": 999,
-                "oldPrice": 1099,
-                "sold": 170,
-                "rating": 4.7,
-                "images": [
-                    "https://res.cloudinary.com/ddyreawwf/image/upload/v1732779960/no-image_ur9qsg.jpg"
-                ],
-                "variants": {
-                    "color": "Red",
-                    "storage": "512GB"
-                }
-            }
-        ]
+            ]
+        }
+    ],
+    "meta": {
+        "page": "1",
+        "take": "5",
+        "itemCount": 2,
+        "pageCount": 1,
+        "hasPreviousPage": false,
+        "hasNextPage": false
     }
-]
+}

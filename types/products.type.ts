@@ -1,18 +1,3 @@
-export type SkuCard = {
-  newPrice: number
-  oldPrice?: number
-  sold: number
-  rating: number
-  images: string[]
-  variants: Record<string, unknown>
-}
-
-export type ProductCard = {
-  name: string
-  slug: string
-  skus: SkuCard[]
-}
-
 export type Brand = {
   id: number
   brandName: string
@@ -26,4 +11,30 @@ export type Category = {
   categoryName: string
   categoryUrl: string
   description?: string
+}
+
+export type SkuAttribute = {
+  key: string
+  value: unknown
+}
+
+export type SkuResponse = {
+  id: number
+  skuName: string
+  image: string
+  slug: string
+  skuAttributes: SkuAttribute[]
+  sellingPrice: number
+  displayPrice: number
+}
+
+export type ProductResponse = {
+  id: number
+  productName: string
+  slug: string
+  categoryName: string
+  categoryUrl: string
+  brandName: string
+  brandUrl: string
+  skus: SkuResponse[]
 }
