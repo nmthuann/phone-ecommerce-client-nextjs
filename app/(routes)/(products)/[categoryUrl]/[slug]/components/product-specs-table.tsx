@@ -20,8 +20,8 @@ const ProductSpecsTable: React.FC<ProductSpecsTableProps> = ({ productSpecs }) =
       ) : (
         <Table isStriped aria-label='Product Specifications Table'>
           <TableHeader>
-            <TableColumn>Thuộc tính sản phẩm</TableColumn>
-            <TableColumn>Thông tin sản phẩm</TableColumn>
+            <TableColumn>Tên cấu hình</TableColumn>
+            <TableColumn>Thông tin cấu hình</TableColumn>
           </TableHeader>
           <TableBody>
             {productSpecs.map(specification => (

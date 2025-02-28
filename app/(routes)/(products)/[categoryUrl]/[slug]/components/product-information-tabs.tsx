@@ -8,7 +8,7 @@ import LoadingOverlay from '@/components/loading-overlay'
 
 const tabs = [
   {
-    title: 'Thông tin chi tiết'
+    title: 'Thông Số Kỹ Thuật'
   },
 
   {
@@ -28,10 +28,10 @@ const ProductInformationTabs: React.FC<ProductInfomationTabsProps> = ({ data }) 
     <div className='flex w-full flex-col  p-3 rounded-md'>
       <Tabs items={tabs} color='primary' variant='underlined'>
         {item => (
-          <Tab key={item.title} title={item.title} className='text-[18px]'>
+          <Tab key={item.title} title={item.title} className='text-base'>
             <Divider />
             <div className='py-2'>
-              {item.title === 'Thông tin chi tiết' && <ProductSpecsTable productSpecs={data.productSpecs} />}
+              {item.title === 'Thông Số Kỹ Thuật' && <ProductSpecsTable productSpecs={data.productSpecs} />}
               {item.title === 'Mô tả' && (
                 <p className='text-[18px] font-[400] text-[#b1b0b6] font-Inter whitespace-pre-line w-full overflow-hidden'>
                   {data.description ?? 'Sản phẩm không có mô tả'}

@@ -17,15 +17,6 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
   const router = useRouter()
   //const pathname = usePathname()
   const [selectedSku, setSelectedSku] = useState<SkuResponse>(product.skus[0]) // Chọn SKU đầu tiên mặc định
-  // const [isMounted, setIsMounted] = useState(false)
-
-  // useEffect(() => {
-  //   setIsMounted(true)
-  // }, [])
-
-  // if (!isMounted) {
-  //   return null
-  // }
 
   const discountPercentage = selectedSku.displayPrice
     ? Math.round(((selectedSku.displayPrice - selectedSku.sellingPrice) / selectedSku.sellingPrice) * 100)
@@ -36,7 +27,8 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
       // isPressable
       aria-label='Choose Card'
       className='w-60 h-full cursor-pointer min-h-[400px] flex flex-col justify-between 
-        shadow-xl hover:shadow-2xl transition-shadow duration-300 dark:bg-slate-900 rounded-2xl p-2'
+        shadow-xl hover:shadow-2xl transition-shadow duration-300 
+        dark:bg-slate-950 dark:border-slate-400 dark:border-1 rounded-2xl p-2'
       isBlurred
       // onPress={() => router.push(`${product.categoryUrl}/${product.slug}`)}
     >
@@ -52,7 +44,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
           loading='lazy'
         />
 
-        <Chip radius='full' variant='faded' className='text-slate-500'>
+        <Chip radius='full' variant='faded' className='text-slate-500 dark:text-white'>
           Trả góp 0%
         </Chip>
 
@@ -68,7 +60,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
                 />
                 <p className='text-sm font-semibold text-red-600'>-{discountPercentage}%</p>
               </div>
-              <p className='text-tiny text-teal-600'>
+              <p className='text-tiny text-cyan-500'>
                 Giảm {formatter.format(selectedSku.displayPrice - selectedSku.sellingPrice)}
               </p>
             </div>
@@ -86,8 +78,8 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
               key={sku.id}
               className={`px-3 py-1 border rounded ${
                 selectedSku.id === sku.id
-                  ? ' text-slate-950 border-2 border-red-600'
-                  : 'text-slate-950 border-2 border-slate-400'
+                  ? ' text-slate-950 border-2 border-red-600 dark:text-white'
+                  : 'text-slate-950 border-2 border-slate-400 dark:text-white'
               }`}
               onClick={() => setSelectedSku(sku)}
             >

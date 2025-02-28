@@ -124,13 +124,12 @@ const ConfirmQuantityModal: React.FC<ConfirmQuantityModalProps> = ({
               </div>
             </ModalBody>
             <ModalFooter>
-              <Button color='success' className='font-medium' variant='light' onPress={onClose}>
+              <Button color='warning' className='font-medium' variant='light' onPress={onClose}>
                 Đóng
               </Button>
               <Button
                 color='primary'
-                className='font-medium text-white
-                                bg-gradient-to-r from-lime-400  to-green-600'
+                className='font-medium bg-gradient-to-r from-red-600 to-red-900 text-white'
                 onPress={onClose}
                 onClick={onAddToCart}
               >

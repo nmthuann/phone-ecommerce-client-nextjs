@@ -44,7 +44,6 @@ const CategoryExplorer: React.FC<CategoryComponentProps> = ({ category, brands, 
   const router = useRouter()
   const pathname = usePathname()
 
-  // const category = cats.find(cat => cat.categoryUrl === pathname)
   const items = [
     {
       title: category.categoryName ?? '',

@@ -21,38 +21,37 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
   }
 
   return (
-    <div className='grid gap-6 md:gap-3 items-start'>
-      <div className='relative overflow-hidden rounded-lg'>
+    <div className='grid gap-6 md:gap-3 items-start mt-2'>
+      <div className='relative overflow-hidden shadow rounded-xl p-2'>
         <Image
-          width={600}
-          height={600}
+          width={500}
+          height={500}
           src={images[mainImageIndex]}
           alt='Product image'
-          className='object-cover w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-lg'
+          className='object-cover w-full h-[256px] sm:h-[350px] md:h-[450px] lg:h-[550px] rounded-lg'
         />
         <div className='absolute inset-0 flex items-center justify-between px-4'>
           <Button onPress={handlePreviousClick} variant='ghost' isIconOnly>
-            <ChevronLeft className='w-6 h-6' />
+            <ChevronLeft className='w-6 h-6 dark:text-slate-800' />
           </Button>
           <Button onPress={handleNextClick} variant='ghost' isIconOnly>
-            <ChevronRight className='w-6 h-6' />
+            <ChevronRight className='w-6 h-6 dark:text-slate-800' />
           </Button>
         </div>
       </div>
 
-      {/* TODO: thay thế div sang button */}
       <div className='grid grid-cols-5 gap-4'>
         {images.map((image, index) => (
-          <div
+          <Button
             className={cn(
               index === mainImageIndex ? 'border-2 border-primary' : 'border-2 border-gray-200',
               'relative overflow-hidden rounded-lg cursor-pointer w-full h-auto'
             )}
             key={index}
-            onClick={() => handleImageClick(index)}
+            onPress={() => handleImageClick(index)}
           >
             <Image src={image} alt='product image' width={100} height={100} className='object-cover w-full h-full' />
-          </div>
+          </Button>
         ))}
       </div>
     </div>

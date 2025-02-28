@@ -21,21 +21,31 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
   }
 
   return (
-    <div className='p-5 opacity-100'>
+    <div className='p-5 opacity-100 shadow-lg rounded-2xl'>
       <h1 className='!text-2xl font-bold text-slate-800 dark:text-slate-100'>{selectedOption.skuName}</h1>
+      <div className='flex space-x-4'>
+        <p className='text-tiny text-cyan-500'>{selectedOption.skuNo}</p>
+        <p className='text-tiny text-cyan-500'>{selectedOption.barcode}</p>
+      </div>
+
       <br />
-      <div className='w-full flex items-center my-2 justify-between'>
-        <Chip startContent={<CheckCircle size={18} />} variant='bordered' color='success' size='lg'>
-          <span className='text-base font-Inter font-[500] font-Monserrat'>{product.brandName}</span>
+      <div className='w-full flex items-center justify-between'>
+        <Chip
+          startContent={<CheckCircle size={18} className='text-white' />}
+          variant='shadow'
+          className='bg-gradient-to-r from-red-600 to-red-800'
+          size='lg'
+        >
+          <span className='text-base text-white'>{product.brandName}</span>
         </Chip>
       </div>
       <br />
-      <p className='text-[18px] font-[400] text-[#b1b0b6] font-Inter'>{product.description}</p>
+      <p className='text-slate-700 dark:text-slate-200'>{product.description}</p>
       <br />
       <div className='w-full'>
-        <span className='text-[16px]  font-Inter font-[500] !text-2xl pl-2 font-Monserrat'>Đơn vị mua hàng:</span>
+        <span className='text-base'>Lựa chọn máy phù hợp:</span>
         <br />
-        <div className='w-full mt-4'>
+        <div className='w-full mt-4 space-y-4'>
           {product.sku.map(option => (
             <SkuOptionCheckbox
               key={option.id}
@@ -49,9 +59,8 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
         <Button
           radius='full'
           size='lg'
-          className='w-full  font-Inte  text-white
-                    bg-gradient-to-r from-lime-400  to-green-600
-                     font-medium duration-300 transition-opacity'
+          className='w-full bg-gradient-to-r from-red-600 to-red-900 text-white
+          font-medium duration-300 transition-opacity'
           onPress={onOpen}
           isDisabled={product.sku.length == 0}
         >
