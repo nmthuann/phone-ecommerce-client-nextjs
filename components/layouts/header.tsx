@@ -4,7 +4,7 @@ import Link from 'next/link'
 import InsightRoll from './insight-roll'
 import SearchBar from '../modules/search/search-bar'
 import { Button } from '@heroui/react'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { ThemeToggle } from './theme-toggle'
 
@@ -27,7 +27,7 @@ const categories = [
 
 export const Header: React.FC = () => {
   const pathname = usePathname()
-
+  const router = useRouter()
   return (
     <header>
       <InsightRoll insights={insights} />
@@ -47,7 +47,12 @@ export const Header: React.FC = () => {
 
           {/* NÚT ĐĂNG NHẬP & GIỎ HÀNG */}
           <div className='flex space-x-4'>
-            <Button startContent={<User2 />} variant='light' className='text-slate-700 dark:text-slate-400'>
+            <Button
+              onPress={() => router.push('login')}
+              startContent={<User2 />}
+              variant='light'
+              className='text-slate-700 dark:text-slate-400'
+            >
               Đăng nhập
             </Button>
             <Button startContent={<LucideShoppingBag />} variant='light' className='text-slate-700 dark:text-slate-400'>
