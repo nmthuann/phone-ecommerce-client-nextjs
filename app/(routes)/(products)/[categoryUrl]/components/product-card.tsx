@@ -1,8 +1,10 @@
+'use client'
 import Currency from '@/components/utilities/currency'
 import { ProductResponse, SkuResponse } from '@/types/products.type'
 import { Button, Card, CardBody, CardFooter, Chip, Image } from '@heroui/react'
 import { ShoppingBag } from 'lucide-react'
-import { FC, useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { FC, useState } from 'react'
 
 type ProductCardProps = {
   product: ProductResponse
@@ -12,25 +14,31 @@ const formatter = new Intl.NumberFormat('vi-VN', {
   currency: 'VND'
 })
 export const ProductCard: FC<ProductCardProps> = ({ product }) => {
+  const router = useRouter()
+  //const pathname = usePathname()
   const [selectedSku, setSelectedSku] = useState<SkuResponse>(product.skus[0]) // Chọn SKU đầu tiên mặc định
-  const [isMounted, setIsMounted] = useState(false)
+  // const [isMounted, setIsMounted] = useState(false)
 
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
+  // useEffect(() => {
+  //   setIsMounted(true)
+  // }, [])
 
-  if (!isMounted) {
-    return null
-  }
+  // if (!isMounted) {
+  //   return null
+  // }
 
   const discountPercentage = selectedSku.displayPrice
     ? Math.round(((selectedSku.displayPrice - selectedSku.sellingPrice) / selectedSku.sellingPrice) * 100)
     : null
   return (
     <Card
+      key={selectedSku.id}
+      // isPressable
+      aria-label='Choose Card'
       className='w-60 h-full cursor-pointer min-h-[400px] flex flex-col justify-between 
         shadow-xl hover:shadow-2xl transition-shadow duration-300 dark:bg-slate-900 rounded-2xl p-2'
       isBlurred
+      // onPress={() => router.push(`${product.categoryUrl}/${product.slug}`)}
     >
       <CardBody className='overflow-visible flex flex-col gap-4 p-4'>
         <Image
@@ -91,6 +99,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
       <CardFooter className='p-4'>
         <Button
           startContent={<ShoppingBag />}
+          onPress={() => router.push(`${product.categoryUrl}/${product.slug}`)}
           variant='shadow'
           className='w-full bg-gradient-to-r from-red-600 to-red-900 text-white'
         >

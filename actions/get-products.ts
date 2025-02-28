@@ -15,7 +15,7 @@ export async function getProducts(
 
   const options = {
     method: 'GET',
-    next: { revalidate: 300 }
+    next: { revalidate: 0 }
   }
 
   try {

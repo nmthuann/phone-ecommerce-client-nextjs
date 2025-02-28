@@ -30,10 +30,9 @@ export const ErrorComponent: React.FC<ErrorComponentProps> = ({ title, message }
         <Button
           onPress={() => router.refresh()}
           className='flex items-center justify-center px-4 py-2 
-                    text-white font-semibold 
-                    bg-gradient-to-r from-lime-400 to-green-600
-                    hover:from-lime-500 hover:to-green-700
-                     transition-all duration-300 ease-in-out'
+                    font-semibold 
+                    bg-gradient-to-r from-red-600 to-red-900 text-white
+                    transition-all duration-300 ease-in-out'
         >
           <RotateCcw className='h-5 w-5' />
           Tải lại trang

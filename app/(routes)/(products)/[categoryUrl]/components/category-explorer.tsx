@@ -31,12 +31,12 @@ import { useMemo, useState } from 'react'
 import LoadingOverlay from '@/components/loading-overlay'
 
 type CategoryComponentProps = {
+  category: Category
   brands: Brand[]
-  cats: Category[]
   products: ProductResponse[]
 }
 
-const CategoryExplorer: React.FC<CategoryComponentProps> = ({ brands, cats, products }) => {
+const CategoryExplorer: React.FC<CategoryComponentProps> = ({ category, brands, products }) => {
   const [selectedKeys, setSelectedKeys] = useState(new Set(['Sản phẩm bán chạy']))
 
   const selectedValue = useMemo(() => Array.from(selectedKeys).join(', ').replaceAll('_', ' '), [selectedKeys])
@@ -44,17 +44,17 @@ const CategoryExplorer: React.FC<CategoryComponentProps> = ({ brands, cats, prod
   const router = useRouter()
   const pathname = usePathname()
 
-  const category = cats.find(cat => cat.categoryUrl === pathname)
+  // const category = cats.find(cat => cat.categoryUrl === pathname)
   const items = [
     {
-      title: category?.categoryName ?? '',
-      path: category?.categoryUrl ?? ''
+      title: category.categoryName ?? '',
+      path: category.categoryUrl ?? ''
     }
   ]
   const home = { title: 'Trang chủ', path: '/' }
   const breadcrumbItems = [home, ...items]
 
-  if (!brands || !cats || !products) {
+  if (!brands || !category || !products) {
     return <LoadingOverlay loading={true} text='Please wait...' />
   }
   return (
