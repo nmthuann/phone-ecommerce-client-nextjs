@@ -10,12 +10,17 @@ import toast from 'react-hot-toast'
 import * as z from 'zod'
 import Link from 'next/link'
 import { Loader2 } from 'lucide-react'
-import { ErrorInput } from '@/constants/errors.enum'
+import { AuthExceptionMessages, ErrorInput } from '@/constants/errors.enum'
 import { Button } from '@heroui/react'
+import axios from 'axios'
+import { Messages } from '@/constants/messages.enum'
+import { useAuthContext } from '@/providers/auth-provider'
 
 export const LoginForm: React.FC = () => {
   const [onBtnLoad, setOnBtnLoad] = useState(false)
   const router = useRouter()
+  const { setUserCallback } = useAuthContext()
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -27,15 +32,22 @@ export const LoginForm: React.FC = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       setOnBtnLoad(true)
-      setTimeout(() => {
-        console.log('Form data submitted:', values)
+      const res = await axios.post(`/api/auth/login`, values)
+      if (res.data.message) {
         setOnBtnLoad(false)
-        toast.success('Login successful!')
+        toast.error(res.data.message)
+      } else {
+        setOnBtnLoad(false)
+        toast.success(Messages.LOGIN_SUCCESS)
+        setUserCallback(res.data)
         router.push('/')
-      }, 3000)
-    } catch (error) {
+      }
+    } catch (error: unknown) {
+      console.log('error:::', error)
       setOnBtnLoad(false)
-      toast.error(`Login failed. Error: ${error}`)
+      toast.error(`${AuthExceptionMessages.LOGIN_FAILED}`)
+    } finally {
+      setOnBtnLoad(false)
     }
   }
 

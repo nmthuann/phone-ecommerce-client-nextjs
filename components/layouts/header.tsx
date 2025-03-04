@@ -3,10 +3,13 @@ import { LucideShoppingBag, User2 } from 'lucide-react'
 import Link from 'next/link'
 import InsightRoll from './insight-roll'
 import SearchBar from '../modules/search/search-bar'
-import { Button } from '@heroui/react'
+import { Badge, Button } from '@heroui/react'
 import { usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { ThemeToggle } from './theme-toggle'
+import { useAuthContext } from '@/providers/auth-provider'
+import UserAction from './user-action'
+import { Cart } from '@/types/orders.type'
 
 const insights: string[] = [
   '1000+ Sản phẩm đa dạng 🛒',
@@ -25,9 +28,15 @@ const categories = [
   { label: 'Phụ kiện', href: '/phu-kien' }
 ]
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  cart: Cart
+}
+
+export const Header: React.FC<HeaderProps> = ({ cart }) => {
   const pathname = usePathname()
   const router = useRouter()
+  const { user } = useAuthContext()
+
   return (
     <header>
       <InsightRoll insights={insights} />
@@ -46,19 +55,51 @@ export const Header: React.FC = () => {
           </div>
 
           {/* NÚT ĐĂNG NHẬP & GIỎ HÀNG */}
-          <div className='flex space-x-4'>
-            <Button
-              onPress={() => router.push('login')}
-              startContent={<User2 />}
-              variant='light'
-              className='text-slate-700 dark:text-slate-400'
-            >
-              Đăng nhập
-            </Button>
-            <Button startContent={<LucideShoppingBag />} variant='light' className='text-slate-700 dark:text-slate-400'>
-              Giỏ hàng
-            </Button>
-            <ThemeToggle />
+          <div className=''>
+            {user ? (
+              <div className='flex space-x-4'>
+                <ThemeToggle />
+
+                <Badge
+                  content={cart.totalItems}
+                  shape='circle'
+                  color='danger'
+                  className='dark:border-white border-slate-900'
+                >
+                  <Button
+                    radius='full'
+                    isIconOnly
+                    aria-label='more than 99 notifications'
+                    variant='light'
+                    className='font-bold rounded-full dark:text-white text-slate-800 border-3 
+                    dark:bg-slate-900 bg-white  dark:border-slate-400'
+                    onPress={() => router.push('/cart')}
+                  >
+                    <LucideShoppingBag size={18} className='text-slate-800 dark:text-slate-400' />
+                  </Button>
+                </Badge>
+                <UserAction user={user} />
+              </div>
+            ) : (
+              <div className='flex space-x-4'>
+                <Button
+                  onPress={() => router.push('login')}
+                  startContent={<User2 />}
+                  variant='light'
+                  className='text-slate-700 dark:text-slate-400'
+                >
+                  Đăng nhập
+                </Button>
+                <Button
+                  startContent={<LucideShoppingBag />}
+                  variant='light'
+                  className='text-slate-700 dark:text-slate-400'
+                >
+                  Giỏ hàng
+                </Button>
+                <ThemeToggle />
+              </div>
+            )}
           </div>
         </div>
 

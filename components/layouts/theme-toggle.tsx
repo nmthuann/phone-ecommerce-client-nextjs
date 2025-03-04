@@ -12,11 +12,7 @@ export function ThemeToggle() {
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Button
-          isIconOnly
-          variant='faded'
-          className='rounded-full border-2 shadow-md dark:bg-slate-900 bg-white dark:border-slate-400'
-        >
+        <Button isIconOnly className='rounded-full border-3 shadow dark:bg-slate-900 bg-white dark:border-slate-400'>
           <Sun className='h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 text-slate-800 dark:text-slate-400' />
           <Moon className='absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 text-slate-800 dark:text-slate-400' />
           <span className='sr-only'>Toggle theme</span>
