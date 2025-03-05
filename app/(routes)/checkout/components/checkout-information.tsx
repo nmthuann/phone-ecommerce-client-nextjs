@@ -31,7 +31,7 @@ const CheckoutInformation: FC<CheckoutInformationProps> = ({ data }) => {
 
   return (
     <div
-      className='flex-1 md:flex-[1] dark:shadow-slate-500/50 dark:border-2 border-2
+      className='flex-1 md:flex-[1] dark:shadow-slate-500/50 dark:border-slate-400 border-2
                 bg-white dark:bg-slate-950 rounded-3xl p-4 h-[560px]'
     >
       <Sheet>
@@ -56,8 +56,7 @@ const CheckoutInformation: FC<CheckoutInformationProps> = ({ data }) => {
             <SheetClose asChild>
               <Button
                 variant='shadow'
-                className='w-full text-white 
-                    bg-gradient-to-r from-lime-400  to-green-600 
+                className='w-full bg-gradient-to-r from-red-600 to-red-900 text-white
                      font-medium'
                 isDisabled
               >
@@ -74,9 +73,9 @@ const CheckoutInformation: FC<CheckoutInformationProps> = ({ data }) => {
             Vui lòng đăng nhập để có thể thực hiện tính năng đổi điểm.
           </span>
         </Label>
-        <Switch disabled aria-readonly />
+        <Switch disabled aria-readonly color='warning' />
       </div>
-      <Card className='max-w-full' radius='lg'>
+      <Card className='max-w-full dark:bg-slate-900 bg-white' radius='lg'>
         <CardHeader className='flex gap-3'>
           <p className='text-xl font-semibold'>Thông tin thanh toán</p>
         </CardHeader>
@@ -84,12 +83,11 @@ const CheckoutInformation: FC<CheckoutInformationProps> = ({ data }) => {
         <CardBody>
           <div className='flex justify-between mb-2'>
             <span>Tổng tiền</span>
-            {/* <span>{totalPrice.toLocaleString()} ₫</span> */}
-            <Currency value={data.totalPrice} /> {/* Format total price */}
+            <Currency className='text-xl' value={data.totalPrice} />
           </div>
           <div className='flex justify-between mb-2'>
             <span>Tổng khuyến mãi</span>
-            <span>{'-1,500,000 đ'}</span>
+            <Currency className='text-xl text-red-600' value={0} />
           </div>
           <div className='flex justify-between mb-2'>
             <span>Phí vận chuyển</span>
@@ -99,20 +97,19 @@ const CheckoutInformation: FC<CheckoutInformationProps> = ({ data }) => {
           <div className='flex justify-between mb-2 font-bold'>
             <span>Cần thanh toán</span>
 
-            <Currency value={data.totalPrice - 1500000} />
+            <Currency value={data.totalPrice} />
           </div>
           <div className='flex justify-between mb-2 '>
             <span className='text-base font-bold '>Điểm thưởng</span>
-            <span className='text-base font-bold text-yellow-400'>
+            <span className='text-base font-bold text-yellow-500'>
               + {Math.floor(data.totalPrice / 1000).toLocaleString()}
             </span>
           </div>
 
           <Button
+            variant='shadow'
             onPress={onPayment}
-            className='w-full text-white 
-                          bg-gradient-to-r from-lime-400  to-green-600 
-                           font-medium duration-300 transition-opacity'
+            className='w-full bg-gradient-to-r from-red-600 to-red-800 text-white font-medium duration-300 transition-opacity'
           >
             Thanh toán
           </Button>
@@ -121,11 +118,11 @@ const CheckoutInformation: FC<CheckoutInformationProps> = ({ data }) => {
         <CardFooter>
           <p className='text-xs text-center'>
             Bằng việc tiến hành đặt mua hàng, bạn đồng ý với{' '}
-            <Link href='#' underline='always' className='text-green-400 text-xs'>
+            <Link href='#' underline='always' className='text-yellow-500 text-xs'>
               Điều khoản dịch vụ
             </Link>{' '}
             và{' '}
-            <Link href='#' underline='always' className='text-green-400 text-xs'>
+            <Link href='#' underline='always' className='text-yellow-500 text-xs'>
               Chính sách xử lý dữ liệu cá nhân
             </Link>{' '}
             của Cửa hàng thương mại điện tử My Phone.

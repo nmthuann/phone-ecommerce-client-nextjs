@@ -5,6 +5,8 @@ import CartBreadcrumb from './components/cart-breadcrumb'
 import CartNotFound from './components/cart-not-found'
 import CartItem from './components/cart-item'
 import CartSummary from './components/cart-summary'
+import Footer from '@/components/layouts/footer'
+import LoadingOverlay from '@/components/loading-overlay'
 
 export const metadata: Metadata = {
   title: 'Giỏ Hàng',
@@ -13,6 +15,9 @@ export const metadata: Metadata = {
 
 const CartPage = async () => {
   const cart = await getCart()
+  if (!cart) {
+    return <LoadingOverlay />
+  }
   return (
     <div>
       <div className='px-4 py-10 sm:px-6 lg:px-8'>
@@ -41,6 +46,8 @@ const CartPage = async () => {
           <CartSummary data={cart} />
         </div>
       </div>
+      <Divider />
+      <Footer />
     </div>
   )
 }

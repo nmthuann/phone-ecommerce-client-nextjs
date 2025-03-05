@@ -27,14 +27,18 @@ export async function POST(req: Request) {
       email: data.email,
       firstName: data.firstName,
       lastName: data.lastName,
-      avatarUrl: data.avatarUrl
+      avatarUrl: data.avatarUrl,
+      phone: data.phone
     }
-    const oneDay = 24 * 60 * 60 * 1000
-    const cookieExpiration = new Date(Date.now() + oneDay)
-    ;(await cookies()).set({
+    const FIFTEEN_MINUTES = 15 * 60 * 1000
+    const cookieExpiration = new Date(Date.now() + FIFTEEN_MINUTES)
+    const cookieStore = await cookies()
+    cookieStore.set({
       name: 'access_token',
       value: data.accessToken,
-      expires: cookieExpiration
+      expires: cookieExpiration,
+      httpOnly: true,
+      path: '/'
     })
     return NextResponse.json(user)
   } catch (error: unknown) {

@@ -50,7 +50,7 @@ export const CustomerOrderForm: React.FC<CustomerOrderFormProps> = ({ customer }
       ? {
           email: customer.email,
           fullName: `${customer.lastName} ${customer.firstName}`,
-          phone: ''
+          phone: customer.phone
         }
       : {
           email: '',

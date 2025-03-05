@@ -3,6 +3,7 @@ export type User = {
   firstName: string
   lastName: string
   avatarUrl: string
+  phone: string
 }
 
 export type UserRegister = {

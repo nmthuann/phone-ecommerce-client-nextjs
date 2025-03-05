@@ -12,7 +12,7 @@ const PaymentPage = async () => {
     <div>
       <div
         className='flex flex-col md:flex-row h-auto mt-5 mb-5 ml-2 mr-2
-              rounded-3xl border-none'
+              rounded-3xl border-none space-x-4'
       >
         <OrderInformation data={cart} location={location} />
         <CheckoutInformation data={cart} />

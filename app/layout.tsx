@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import { Open_Sans } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/providers/theme-provider'
-import AuthProvider from '@/providers/auth-provider'
 import { Header } from '@/components/layouts/header'
-import { getCart } from '@/actions/get-cart'
+import { ToastProvider } from '@/providers/toast-provider'
+import AuthProvider from '@/providers/auth-provider'
 
 const openSans = Open_Sans({
   variable: '--font-open-sans',
@@ -21,17 +21,17 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const data = await getCart()
-  console.log('userCart:::', data)
   return (
     <html lang='en' suppressHydrationWarning={true}>
       <body className={openSans.className}>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+          <ToastProvider />
           <AuthProvider>
-            <Header cart={data} />
+            <Header />
             {children}
           </AuthProvider>
         </ThemeProvider>
+        <ToastProvider />
       </body>
     </html>
   )

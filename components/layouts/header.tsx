@@ -7,9 +7,8 @@ import { Badge, Button } from '@heroui/react'
 import { usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { ThemeToggle } from './theme-toggle'
-import { useAuthContext } from '@/providers/auth-provider'
 import UserAction from './user-action'
-import { Cart } from '@/types/orders.type'
+import { useAuthContext } from '@/providers/auth-provider'
 
 const insights: string[] = [
   '1000+ Sản phẩm đa dạng 🛒',
@@ -28,11 +27,7 @@ const categories = [
   { label: 'Phụ kiện', href: '/phu-kien' }
 ]
 
-interface HeaderProps {
-  cart: Cart
-}
-
-export const Header: React.FC<HeaderProps> = ({ cart }) => {
+export const Header: React.FC = () => {
   const pathname = usePathname()
   const router = useRouter()
   const { user } = useAuthContext()
@@ -60,12 +55,7 @@ export const Header: React.FC<HeaderProps> = ({ cart }) => {
               <div className='flex space-x-4'>
                 <ThemeToggle />
 
-                <Badge
-                  content={cart.totalItems}
-                  shape='circle'
-                  color='danger'
-                  className='dark:border-white border-slate-900'
-                >
+                <Badge content={'1+'} shape='circle' color='danger' className='dark:border-white border-slate-900'>
                   <Button
                     radius='full'
                     isIconOnly
@@ -91,6 +81,7 @@ export const Header: React.FC<HeaderProps> = ({ cart }) => {
                   Đăng nhập
                 </Button>
                 <Button
+                  onPress={() => router.push('/login')}
                   startContent={<LucideShoppingBag />}
                   variant='light'
                   className='text-slate-700 dark:text-slate-400'

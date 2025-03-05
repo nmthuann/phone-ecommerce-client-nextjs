@@ -3,7 +3,7 @@ import { toast } from 'react-hot-toast'
 import { MinusCircleIcon, PlusCircleIcon, Trash2 } from 'lucide-react'
 import { useState } from 'react'
 import { CartItem as CartItemType } from '@/types/orders.type'
-import { Button, Image } from '@heroui/react'
+import { Button, Chip, Image } from '@heroui/react'
 import Currency from '@/components/utilities/currency'
 
 interface CartItemProps {
@@ -62,12 +62,12 @@ const CartItem: React.FC<CartItemProps> = ({ data }) => {
             <div className='flex flex-col sm:flex-row text-sm text-gray-500 mt-1'>
               <p> {`Số lượng mua: ${quantityInCart}`}</p>
 
-              <p className='sm:ml-4 sm:border-l sm:border-gray-200 sm:pl-4'>{`Đơn vị mua hàng: Cái.`}</p>
+              <p className='sm:ml-4 sm:border-l sm:border-gray-200 sm:pl-4'>{`Đơn vị mua: Chiếc.`}</p>
             </div>
-            {/* <div className='mt-4 flex flex-wrap gap-2 md:gap-4'>
-              {convertStringToJSON(data.).map(skuAttributeJson => (
+            <div className='mt-4 flex flex-wrap gap-2 md:gap-4'>
+              {data.skuAttributes.map(attr => (
                 <Chip
-                  key={skuAttributeJson.attribute}
+                  key={attr.key}
                   variant='shadow'
                   size='sm'
                   classNames={{
@@ -75,10 +75,10 @@ const CartItem: React.FC<CartItemProps> = ({ data }) => {
                     content: 'drop-shadow shadow-black text-white font-medium'
                   }}
                 >
-                  {`${skuAttributeJson.attribute} ${skuAttributeJson.value}`}
+                  {`${attr.key} ${attr.value}`}
                 </Chip>
               ))}
-            </div> */}
+            </div>
           </div>
         </div>
 

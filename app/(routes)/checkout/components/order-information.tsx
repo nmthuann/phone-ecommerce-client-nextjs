@@ -63,7 +63,7 @@ const OrderInformation: FC<OrderInformationProps> = ({ data, location }) => {
       </div>
       <Card isBlurred className='border-none bg-background/60 dark:bg-default-100/50 max-w-full' shadow='sm'>
         <CardHeader className='pb-0 pt-2 px-4 flex-col items-start'>
-          <h4 className='font-bold text-large'>Người đặt hàng</h4>
+          <h4 className='font-bold text-large'>Thông tin khách hàng</h4>
           <small className='text-default-500'>Hãy nhập thông tin của bạn để thuận tiện cho việc thanh toán.</small>
         </CardHeader>
         <CardBody>

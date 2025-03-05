@@ -8,9 +8,9 @@ export async function POST() {
     if (!cookie) {
       return new NextResponse('Unauthenticated', { status: 403 })
     }
-
-    ;(await cookies()).delete('access_token')
-
+    const cookieStore = await cookies()
+    cookieStore.delete('access_token')
+    cookieStore.delete('user')
     return NextResponse.json({
       message: 'Đăng xuất thành công.'
     })

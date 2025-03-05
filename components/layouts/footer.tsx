@@ -56,7 +56,7 @@ const Footer = () => {
         </div>
       </div>
       <p className='text-[18px] font-[400] text-[#b1b0b6] font-Inter text-center text-xs sm:text-sm md:text-base'>
-        Copyright © 2024 My Phone . All Rights Reserved
+        {`Copyright © ${new Date().getFullYear()} My Phone . All Rights Reserved`}
       </p>
       <br />
       <br />
