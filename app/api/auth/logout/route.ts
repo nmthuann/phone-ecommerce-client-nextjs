@@ -15,7 +15,7 @@ export async function POST() {
       message: 'Đăng xuất thành công.'
     })
   } catch (error) {
-    console.log('[BRANDS_POST]', error)
+    console.log('[LOGOUT_POST]', error)
     return new NextResponse('Internal error', { status: 500 })
   }
 }

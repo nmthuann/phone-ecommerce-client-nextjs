@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server'
 import axios from 'axios'
 import { User } from '@/types/users.type'
 import { AuthExceptionMessages, ErrorInput } from '@/constants/errors.enum'
-import { LoginResponse } from '@/types/responses/auth.response.type'
+import { LoginResponse } from '@/types/auth.response.type'
 
 const URL = `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/auth/login`
 

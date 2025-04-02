@@ -1,9 +1,9 @@
 'use server'
 import { SystemError } from '@/constants/errors.enum'
-import { SpuSkuMappingDto } from '@/types/products.type'
+import { ProductDetailResponse } from '@/types/responses.type'
 
-export async function getProductBySlug(slug: string): Promise<SpuSkuMappingDto> {
-  const URL = `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/products?slug=/${slug}`
+export async function getProductBySlug(slug: string): Promise<ProductDetailResponse> {
+  const URL = `${process.env.NEXT_PUBLIC_API_URL}/products?slug=/${slug}`
   const options = {
     method: 'GET',
     next: { revalidate: 0 }
@@ -16,7 +16,7 @@ export async function getProductBySlug(slug: string): Promise<SpuSkuMappingDto> 
       console.error(`Error fetching data: ${res.statusText}`)
       throw new Error(SystemError.FETCH_DATA_ERROR)
     }
-    const data: SpuSkuMappingDto = await res.json()
+    const data: ProductDetailResponse = await res.json()
 
     return data
   } catch (error) {

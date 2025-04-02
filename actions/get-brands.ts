@@ -1,12 +1,11 @@
-'use server'
 import { SystemError } from '@/constants/errors.enum'
 import { Brand } from '@/types/products.type'
 
 export async function getBrands(): Promise<Brand[]> {
-  const URL = `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/brands`
+  const URL = `${process.env.NEXT_PUBLIC_API_URL}/brands`
   const options = {
     method: 'GET',
-    next: { revalidate: 300 }
+    next: { revalidate: 0 }
   }
 
   try {

@@ -1,4 +1,5 @@
 'use client'
+
 import { LucideShoppingBag, User2 } from 'lucide-react'
 import Link from 'next/link'
 import InsightRoll from './insight-roll'
@@ -21,10 +22,10 @@ const insights: string[] = [
 ]
 
 const categories = [
-  { label: 'Điện thoại', href: '/dien-thoai' },
-  { label: 'Đồng hồ', href: '/dong-ho' },
-  { label: 'Máy tính bảng', href: '/may-tinh-bang' },
-  { label: 'Phụ kiện', href: '/phu-kien' }
+  { label: 'Apple', href: '/apple' },
+  { label: 'Samsung', href: '/samsung' },
+  { label: 'Oppo', href: '/oppo' },
+  { label: 'Xiaomi', href: '/xiaomi' }
 ]
 
 export const Header: React.FC = () => {

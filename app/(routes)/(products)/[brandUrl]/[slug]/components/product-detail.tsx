@@ -2,20 +2,22 @@
 
 import { useState } from 'react'
 import { CheckCircle } from 'lucide-react'
-import { ProductSkuDto, SpuSkuMappingDto } from '@/types/products.type'
 import { Button, Chip, useDisclosure } from '@heroui/react'
 import { SkuOptionCheckbox } from './sku-option-checkbox'
 import ConfirmQuantityModal from './confirm-quantity-modal'
+// import { User } from '@/types/users.type'
+import { ProductDetailResponse, SkuDetailResponse } from '@/types/responses.type'
 
 interface ProductDetailProps {
-  product: SpuSkuMappingDto
+  product: ProductDetailResponse
+  // user: User | null
 }
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
-  const [selectedOption, setSelectedOption] = useState<ProductSkuDto>(product.sku[0])
+  const [selectedOption, setSelectedOption] = useState<SkuDetailResponse>(product.sku[0])
   const [quantity, setQuantity] = useState(1)
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
-  const handleOptionChange = (option: ProductSkuDto) => {
+  const handleOptionChange = (option: SkuDetailResponse) => {
     setSelectedOption(option)
     setQuantity(1)
   }
@@ -72,6 +74,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
           onOpenChange={onOpenChange}
           quantity={quantity}
           setQuantity={setQuantity}
+          // user={user}
         />
       </div>
     </div>

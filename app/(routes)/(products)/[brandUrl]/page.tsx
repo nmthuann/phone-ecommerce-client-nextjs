@@ -3,29 +3,27 @@ import CategoryExplorer from './components/category-explorer'
 import Footer from '@/components/layouts/footer'
 import { ErrorComponent } from '@/components/errors/error-component'
 import NotFoundComponent from '@/components/errors/not-found-component'
-import { getBrands } from '@/actions/get-brands'
 import { getProducts } from '@/actions/get-products'
-import { getCategoryByUrl } from '@/actions/get-category'
+import { getBrandByUrl } from '@/actions/get-brand'
 
-const CategoryPage = async ({ params }: { params: Promise<{ categoryUrl: string }> }) => {
-  const { categoryUrl } = await params
-  if (!categoryUrl) {
+const BrandPage = async ({ params }: { params: Promise<{ brandUrl: string }> }) => {
+  const { brandUrl } = await params
+  if (!brandUrl) {
     return <NotFoundComponent />
   }
 
   try {
-    const category = await getCategoryByUrl(categoryUrl)
+    const brand = await getBrandByUrl(brandUrl)
 
-    if (!category) {
+    if (!brand) {
       return <NotFoundComponent />
     }
 
-    const brands = await getBrands()
-    const products = await getProducts(categoryUrl, 'apple', 1, 5)
+    const products = await getProducts(brandUrl, 1, 10)
 
     return (
       <div>
-        <CategoryExplorer brands={brands} category={category} products={products} />
+        <CategoryExplorer brand={brand} products={products.data} />
         <Divider />
         <Footer />
       </div>
@@ -38,4 +36,4 @@ const CategoryPage = async ({ params }: { params: Promise<{ categoryUrl: string 
   }
 }
 
-export default CategoryPage
+export default BrandPage

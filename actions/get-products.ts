@@ -1,17 +1,11 @@
 'use server'
 import { SystemError } from '@/constants/errors.enum'
-import { OrderBy } from '@/constants/order-by.enum'
-import { ProductResponse } from '@/types/products.type'
-import { Page } from '@/types/responses/paginated-response.type'
+import { Page } from '@/types/page.type'
+import { ProductResponse } from '@/types/responses.type'
 
-const path = `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/products`
-export async function getProducts(
-  categoryUrl: string,
-  brandUrl: string,
-  page: number,
-  size: number
-): Promise<ProductResponse[]> {
-  const URL = `${path}?categoryUrl=/${categoryUrl}&brandUrl=/${brandUrl}&order=${OrderBy.DESC}&page=${page}&take=${size}`
+const path = `${process.env.NEXT_PUBLIC_API_URL}/products`
+export async function getProducts(brandUrl: string, page: number, size: number): Promise<Page<ProductResponse>> {
+  const URL = `${path}?brandUrl=/${brandUrl}&page=${page}&size=${size}`
 
   const options = {
     method: 'GET',
@@ -25,9 +19,8 @@ export async function getProducts(
       console.error(`Error fetching data: ${res.statusText}`)
       throw new Error(SystemError.FETCH_DATA_ERROR)
     }
-    const paginatedResponse: Page<ProductResponse> = await res.json()
-    console.log(paginatedResponse.data)
-    return paginatedResponse.data
+    const products: Page<ProductResponse> = await res.json()
+    return products
   } catch (error) {
     console.error('Error fetching data:', error)
     throw new Error(SystemError.FETCH_DATA_ERROR)

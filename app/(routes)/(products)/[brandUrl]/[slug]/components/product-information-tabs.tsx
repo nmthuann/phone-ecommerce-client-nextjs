@@ -1,10 +1,12 @@
 'use client'
 
 import React from 'react'
-import { SpuSkuMappingDto } from '@/types/products.type'
+// import { SpuSkuMappingDto } from '@/types/products.type'
 import { Divider, Tab, Tabs } from '@heroui/react'
 import ProductSpecsTable from './product-specs-table'
 import LoadingOverlay from '@/components/loading-overlay'
+import { ProductDetailResponse } from '@/types/responses.type'
+import { convertJsonToAttributes } from '@/utils/convert'
 
 const tabs = [
   {
@@ -17,7 +19,7 @@ const tabs = [
 ]
 
 interface ProductInfomationTabsProps {
-  data: SpuSkuMappingDto
+  data: ProductDetailResponse
 }
 
 const ProductInformationTabs: React.FC<ProductInfomationTabsProps> = ({ data }) => {
@@ -31,7 +33,9 @@ const ProductInformationTabs: React.FC<ProductInfomationTabsProps> = ({ data }) 
           <Tab key={item.title} title={item.title} className='text-base'>
             <Divider />
             <div className='py-2'>
-              {item.title === 'Thông Số Kỹ Thuật' && <ProductSpecsTable productSpecs={data.productSpecs} />}
+              {item.title === 'Thông Số Kỹ Thuật' && (
+                <ProductSpecsTable productSpecs={convertJsonToAttributes(data.productSpecs)} />
+              )}
               {item.title === 'Mô tả' && (
                 <p className='text-[18px] font-[400] text-[#b1b0b6] font-Inter whitespace-pre-line w-full overflow-hidden'>
                   {data.description ?? 'Sản phẩm không có mô tả'}

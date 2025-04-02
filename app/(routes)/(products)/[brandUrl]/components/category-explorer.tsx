@@ -5,17 +5,17 @@ import {
   BreadcrumbItem,
   Breadcrumbs,
   Button,
-  Card,
-  CardBody,
+  // Card,
+  // CardBody,
   Dropdown,
   DropdownItem,
   DropdownMenu,
-  DropdownTrigger,
-  Tab,
-  Tabs
+  DropdownTrigger
+  // Tab,
+  // Tabs
 } from '@heroui/react'
 import {
-  ChevronDown,
+  // ChevronDown,
   ChevronDownIcon,
   KanbanSquareDashed,
   PackageCheck,
@@ -24,19 +24,19 @@ import {
   Truck,
   Undo
 } from 'lucide-react'
-import { Brand, Category, ProductResponse } from '@/types/products.type'
+import { Brand } from '@/types/products.type'
 import SidebarFilter from './sidebar'
 import { ProductCard } from './product-card'
 import { useMemo, useState } from 'react'
 import LoadingOverlay from '@/components/loading-overlay'
+import { ProductResponse } from '@/types/responses.type'
 
 type CategoryComponentProps = {
-  category: Category
-  brands: Brand[]
+  brand: Brand
   products: ProductResponse[]
 }
 
-const CategoryExplorer: React.FC<CategoryComponentProps> = ({ category, brands, products }) => {
+const CategoryExplorer: React.FC<CategoryComponentProps> = ({ brand, products }) => {
   const [selectedKeys, setSelectedKeys] = useState(new Set(['Sản phẩm bán chạy']))
 
   const selectedValue = useMemo(() => Array.from(selectedKeys).join(', ').replaceAll('_', ' '), [selectedKeys])
@@ -46,14 +46,14 @@ const CategoryExplorer: React.FC<CategoryComponentProps> = ({ category, brands, 
 
   const items = [
     {
-      title: category.categoryName ?? '',
-      path: category.categoryUrl ?? ''
+      title: brand.brandName ?? '',
+      path: brand.brandUrl ?? ''
     }
   ]
   const home = { title: 'Trang chủ', path: '/' }
   const breadcrumbItems = [home, ...items]
 
-  if (!brands || !category || !products) {
+  if (!brand || !products) {
     return <LoadingOverlay loading={true} text='Please wait...' />
   }
   return (
@@ -69,7 +69,7 @@ const CategoryExplorer: React.FC<CategoryComponentProps> = ({ category, brands, 
         </Breadcrumbs>
       </div>
 
-      {/* Tabs và nội dung */}
+      {/* Tabs và nội dung
       <div className=' shadow-lg rounded-xl p-4 md:p-6'>
         <Tabs aria-label='Danh sách thương hiệu' items={brands} variant='underlined'>
           {brand => (
@@ -83,19 +83,17 @@ const CategoryExplorer: React.FC<CategoryComponentProps> = ({ category, brands, 
             </Tab>
           )}
         </Tabs>
-      </div>
+      </div> */}
 
       {/* BỘ LỌC + CARD SẢN PHẨM  */}
       <div className='mt-10 flex flex-row items-start justify-center gap-6'>
-        {/* Sidebar */}
         <div className='hidden md:block w-64'>
           <SidebarFilter />
         </div>
 
-        {/* Danh sách sản phẩm */}
         <div className='flex-1 ml-4'>
           {/* Lọc theo hãng */}
-          <div className='m-2 flex flex-row items-center gap-3'>
+          {/* <div className='m-2 flex flex-row items-center gap-3'>
             <p className='text-sm font-medium text-slate-500'>Lọc nhanh:</p>
             <Dropdown>
               <DropdownTrigger>
@@ -107,7 +105,7 @@ const CategoryExplorer: React.FC<CategoryComponentProps> = ({ category, brands, 
                 {brand => <DropdownItem key={brand.brandAbbreviation}>{brand.brandName}</DropdownItem>}
               </DropdownMenu>
             </Dropdown>
-          </div>
+          </div> */}
 
           {/* Số lượng + hiển thị theo tiêu chí */}
           <div className='flex flex-row items-center justify-between'>
@@ -161,6 +159,7 @@ const CategoryExplorer: React.FC<CategoryComponentProps> = ({ category, brands, 
           )}
         </div>
       </div>
+
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto px-4 mt-10'>
         {benefits.map(benefit => (
           <div

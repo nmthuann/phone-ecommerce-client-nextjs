@@ -1,10 +1,12 @@
 'use client'
 import Currency from '@/components/utilities/currency'
-import { ProductSkuDto } from '@/types/products.type'
+import { SkuDetailResponse } from '@/types/responses.type'
+import { convertJsonToAttributes } from '@/utils/convert'
+// import { ProductSkuDto } from '@/types/products.type'
 import { Checkbox, Chip, cn, User } from '@heroui/react'
 
 interface SkuOptionCheckboxProps {
-  option: ProductSkuDto
+  option: SkuDetailResponse
   isSelected: boolean
   onOptionChange: () => void
 }
@@ -34,7 +36,7 @@ export const SkuOptionCheckbox: React.FC<SkuOptionCheckboxProps> = ({ option, is
           avatarProps={{ size: 'md', src: option.image }}
           description={
             <div className='mt-4 flex flex-wrap gap-2 md:gap-4'>
-              {option.skuAttributes.map(attr => (
+              {convertJsonToAttributes(option.skuAttributes).map(attr => (
                 <Chip
                   key={attr.key}
                   variant='shadow'

@@ -1,21 +1,20 @@
 'use client'
-import { Category, SpuSkuMappingDto } from '@/types/products.type'
+import { Brand } from '@/types/products.type'
+import { ProductDetailResponse } from '@/types/responses.type'
 import { BreadcrumbItem, Breadcrumbs } from '@heroui/react'
 import { usePathname } from 'next/navigation'
 
 interface ProductBreadcumbProps {
-  category: Category
-  // items: { title: string; path: string }[]
-  // currentPath: string
-  product: SpuSkuMappingDto
+  brand: Brand
+  product: ProductDetailResponse
 }
 
-export const ProductBreadcumb: React.FC<ProductBreadcumbProps> = ({ category, product }) => {
+export const ProductBreadcumb: React.FC<ProductBreadcumbProps> = ({ brand, product }) => {
   const pathname = usePathname()
   const items = [
     {
-      title: category?.categoryName ?? '',
-      path: category?.categoryUrl ?? ''
+      title: brand?.brandName ?? '',
+      path: brand?.brandUrl ?? ''
     },
     {
       title: product.productName,

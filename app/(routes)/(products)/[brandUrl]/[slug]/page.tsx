@@ -1,4 +1,3 @@
-import { getCategoryByUrl } from '@/actions/get-category'
 import Loading from '../loading'
 import { getProductBySlug } from '@/actions/get-product-by-slug'
 import { ProductBreadcumb } from './components/product-breadcumb'
@@ -24,16 +23,18 @@ import { Divider } from '@heroui/react'
 import Footer from '@/components/layouts/footer'
 import ProductPolicy from './components/policy'
 import Benefit from './components/benefit'
+// import { getUser } from '@/actions/get-profile'
+import { getBrandByUrl } from '@/actions/get-brand'
 
-const ProductPage = async ({ params }: { params: { categoryUrl: string; slug: string } }) => {
-  const { categoryUrl, slug } = await Promise.resolve(params) // Đảm bảo params được awaited
-
+const ProductPage = async ({ params }: { params: Promise<{ brandUrl: string; slug: string }> }) => {
+  const { brandUrl, slug } = await params
+  // const user = await getUser()
   try {
-    const category = await getCategoryByUrl(categoryUrl)
+    const brand = await getBrandByUrl(brandUrl)
     const product = await getProductBySlug(slug)
     const imageList = product.sku.map(sku => sku.image)
 
-    if (!category || !product) {
+    if (!brand || !product) {
       return <LoadingOverlay loading={true} text='Please wait...' />
     }
 
@@ -44,7 +45,7 @@ const ProductPage = async ({ params }: { params: { categoryUrl: string; slug: st
             <div className='w-full md:w-1/2 dark:bg-slate-950  p-4 space-y-4 rounded-3xl '>
               {/* Breadcrumbs */}
               <div className='mb-4'>
-                <ProductBreadcumb category={category} product={product} />
+                <ProductBreadcumb brand={brand} product={product} />
               </div>
 
               <Suspense fallback={<Loading />}>
