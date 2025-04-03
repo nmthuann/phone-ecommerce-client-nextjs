@@ -1,12 +1,13 @@
 import { Metadata } from 'next'
-import { getCart } from '@/actions/get-cart'
+// import { getCart } from '@/actions/get-cart'
 import { Divider } from '@heroui/react'
-import CartBreadcrumb from './components/cart-breadcrumb'
-import CartNotFound from './components/cart-not-found'
-import CartItem from './components/cart-item'
-import CartSummary from './components/cart-summary'
+//import CartBreadcrumb from './components/cart-breadcrumb'
+// import CartNotFound from './components/cart-not-found'
+// import CartItem from './components/cart-item'
+// import CartSummary from './components/cart-summary'
 import Footer from '@/components/layouts/footer'
-import LoadingOverlay from '@/components/loading-overlay'
+// import LoadingOverlay from '@/components/loading-overlay'
+import Cart from './components/cart'
 
 export const metadata: Metadata = {
   title: 'Giỏ Hàng',
@@ -14,38 +15,9 @@ export const metadata: Metadata = {
 }
 
 const CartPage = async () => {
-  const cart = await getCart()
-  if (!cart) {
-    return <LoadingOverlay />
-  }
   return (
     <div>
-      <div className='px-4 py-10 sm:px-6 lg:px-8'>
-        <h1 className='text-3xl font-bold'>{`Giỏ Hàng ( ${cart.totalItems} )`}</h1>
-      </div>
-      <div className='ml-5'>
-        <CartBreadcrumb />
-      </div>
-
-      <div className='flex flex-col md:flex-row h-auto mt-5 mb-5 shadow rounded-3xl border ml-2 mr-2'>
-        {/* Phần tử 1: Chiếm 2/3 */}
-        <div className='flex-1 md:flex-[2] p-4 space-y-4 rounded-3xl '>
-          <div className='lg:col-span-7 overflow-y-auto max-h-[500px]'>
-            {cart.totalItems === 0 && <CartNotFound />}
-            <ul>
-              {cart.items.map(item => (
-                <CartItem key={item.productSkuId || 0} data={item} />
-              ))}
-              <Divider />
-            </ul>
-          </div>
-        </div>
-
-        {/* Phần tử 2: Chiếm 1/3 */}
-        <div className='flex-1 md:flex-[1] shadow dark:shadow-slate-500/50 dark:shadow-md rounded-3xl p-4 h-[560px] border'>
-          <CartSummary data={cart} />
-        </div>
-      </div>
+      <Cart />
       <Divider />
       <Footer />
     </div>

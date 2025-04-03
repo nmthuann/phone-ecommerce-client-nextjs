@@ -2,41 +2,51 @@
 import { toast } from 'react-hot-toast'
 import { MinusCircleIcon, PlusCircleIcon, Trash2 } from 'lucide-react'
 import { useState } from 'react'
-import { CartItem as CartItemType } from '@/types/orders.type'
 import { Button, Chip, Image } from '@heroui/react'
 import Currency from '@/components/utilities/currency'
+import { SkuDetailResponse } from '@/types/responses.type'
+import { convertJsonToAttributes } from '@/utils/convert'
+import useCart from '@/hooks/use-cart'
 
 interface CartItemProps {
-  data: CartItemType
+  data: SkuDetailResponse
+  currentQuantity: number
 }
 
-const CartItem: React.FC<CartItemProps> = ({ data }) => {
-  const [quantityInCart, setQuantityInCart] = useState(data.quantity)
-
+const CartItem: React.FC<CartItemProps> = ({ data, currentQuantity }) => {
+  const cart = useCart()
+  const [quantityInCart, setQuantityInCart] = useState(currentQuantity)
   const onRemove = () => {
-    console.log('Handle On Remove')
-    // cart.removeItem(productSku.skuId)
+    // console.log('Handle On Remove')
+    cart.removeItem(data.id)
   }
 
   const increaseQuantity = () => {
     const newQuantity = quantityInCart + 1
-    if (data && newQuantity > 5) {
-      setQuantityInCart(5)
-      toast.error(`Số lượng tối đa có thể mua là ${5}`)
+
+    if (newQuantity > 5) {
+      toast.error(`Số lượng tối đa có thể mua là 5.`)
+      return
+    }
+
+    if (newQuantity > data.stock) {
+      toast.error(`Số lượng tồn kho chỉ còn ${data.stock}.`)
       return
     }
 
     setQuantityInCart(newQuantity)
+    cart.updateQuantity(data.id, newQuantity)
     toast.success(`Tăng số lượng thành công.`)
-
-    // cart.updateQuantity(productSku.skuId, newQuantity)
   }
 
   const decreaseQuantity = () => {
     if (quantityInCart > 1) {
       const newQuantity = quantityInCart - 1
       setQuantityInCart(newQuantity)
+      cart.updateQuantity(data.id, newQuantity)
       toast.success(`Giảm số lượng thành công.`)
+    } else {
+      toast.error(`Số lượng tối thiểu là 1.`)
     }
   }
 
@@ -65,7 +75,7 @@ const CartItem: React.FC<CartItemProps> = ({ data }) => {
               <p className='sm:ml-4 sm:border-l sm:border-gray-200 sm:pl-4'>{`Đơn vị mua: Chiếc.`}</p>
             </div>
             <div className='mt-4 flex flex-wrap gap-2 md:gap-4'>
-              {data.skuAttributes.map(attr => (
+              {convertJsonToAttributes(data.skuAttributes).map(attr => (
                 <Chip
                   key={attr.key}
                   variant='shadow'
@@ -85,7 +95,7 @@ const CartItem: React.FC<CartItemProps> = ({ data }) => {
         {/* Price, Quantity, and Remove */}
         <div className='flex flex-col justify-between mt-4 sm:mt-0'>
           <div className='flex items-center justify-between sm:justify-start sm:space-x-4'>
-            <Currency value={data.priceAtAdded} />
+            <Currency value={data.sellingPrice} />
 
             <div className='flex items-center gap-x-2'>
               <Button size='sm' isIconOnly radius='full' onPress={decreaseQuantity}>

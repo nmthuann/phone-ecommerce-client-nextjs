@@ -1,6 +1,6 @@
 'use client'
 
-import { LucideShoppingBag, User2 } from 'lucide-react'
+import { LucideShoppingBag } from 'lucide-react'
 import Link from 'next/link'
 import InsightRoll from './insight-roll'
 import SearchBar from '../modules/search/search-bar'
@@ -9,7 +9,10 @@ import { usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { ThemeToggle } from './theme-toggle'
 import UserAction from './user-action'
-import { useAuthContext } from '@/providers/auth-provider'
+import { useState } from 'react'
+import useCart from '@/hooks/use-cart'
+import LoadingOverlay from '../loading-overlay'
+// import { useAuthContext } from '@/providers/auth-provider'
 
 const insights: string[] = [
   '1000+ Sản phẩm đa dạng 🛒',
@@ -31,8 +34,9 @@ const categories = [
 export const Header: React.FC = () => {
   const pathname = usePathname()
   const router = useRouter()
-  const { user } = useAuthContext()
-
+  const cart = useCart()
+  // const { user } = useAuthContext()
+  // const [loading, setLoading] = useState<boolean>(false)
   return (
     <header>
       <InsightRoll insights={insights} />
@@ -52,46 +56,32 @@ export const Header: React.FC = () => {
 
           {/* NÚT ĐĂNG NHẬP & GIỎ HÀNG */}
           <div className=''>
-            {user ? (
-              <div className='flex space-x-4'>
-                <ThemeToggle />
+            <div className='flex space-x-4'>
+              <ThemeToggle />
 
-                <Badge content={'1+'} shape='circle' color='danger' className='dark:border-white border-slate-900'>
-                  <Button
-                    radius='full'
-                    isIconOnly
-                    aria-label='more than 99 notifications'
-                    variant='light'
-                    className='font-bold rounded-full dark:text-white text-slate-800 border-3 
+              <Badge
+                content={cart.items.length}
+                shape='circle'
+                color='danger'
+                className='dark:border-white border-slate-900'
+              >
+                <Button
+                  radius='full'
+                  isIconOnly
+                  aria-label='more than 99 notifications'
+                  variant='light'
+                  className='font-bold rounded-full dark:text-white text-slate-800 border-3 
                     dark:bg-slate-900 bg-white  dark:border-slate-400'
-                    onPress={() => router.push('/cart')}
-                  >
-                    <LucideShoppingBag size={18} className='text-slate-800 dark:text-slate-400' />
-                  </Button>
-                </Badge>
-                <UserAction user={user} />
-              </div>
-            ) : (
-              <div className='flex space-x-4'>
-                <Button
-                  onPress={() => router.push('login')}
-                  startContent={<User2 />}
-                  variant='light'
-                  className='text-slate-700 dark:text-slate-400'
+                  onPress={() => {
+                    // setLoading(true)
+                    router.push('/cart')
+                  }}
                 >
-                  Đăng nhập
+                  <LucideShoppingBag size={18} className='text-slate-800 dark:text-slate-400' />
                 </Button>
-                <Button
-                  onPress={() => router.push('/login')}
-                  startContent={<LucideShoppingBag />}
-                  variant='light'
-                  className='text-slate-700 dark:text-slate-400'
-                >
-                  Giỏ hàng
-                </Button>
-                <ThemeToggle />
-              </div>
-            )}
+              </Badge>
+              <UserAction />
+            </div>
           </div>
         </div>
 
@@ -111,8 +101,52 @@ export const Header: React.FC = () => {
           ))}
         </nav>
       </div>
+      {/* <LoadingOverlay loading={}/> */}
     </header>
   )
 }
 
 export default Header
+
+// {
+//   user ? (
+//     <div className='flex space-x-4'>
+//       <ThemeToggle />
+
+//       <Badge content={'1+'} shape='circle' color='danger' className='dark:border-white border-slate-900'>
+//         <Button
+//           radius='full'
+//           isIconOnly
+//           aria-label='more than 99 notifications'
+//           variant='light'
+//           className='font-bold rounded-full dark:text-white text-slate-800 border-3
+//                   dark:bg-slate-900 bg-white  dark:border-slate-400'
+//           onPress={() => router.push('/cart')}
+//         >
+//           <LucideShoppingBag size={18} className='text-slate-800 dark:text-slate-400' />
+//         </Button>
+//       </Badge>
+//       <UserAction user={user} />
+//     </div>
+//   ) : (
+//     <div className='flex space-x-4'>
+//       <Button
+//         onPress={() => router.push('login')}
+//         startContent={<User2 />}
+//         variant='light'
+//         className='text-slate-700 dark:text-slate-400'
+//       >
+//         Đăng nhập
+//       </Button>
+//       <Button
+//         onPress={() => router.push('/login')}
+//         startContent={<LucideShoppingBag />}
+//         variant='light'
+//         className='text-slate-700 dark:text-slate-400'
+//       >
+//         Giỏ hàng
+//       </Button>
+//       <ThemeToggle />
+//     </div>
+//   )
+// }

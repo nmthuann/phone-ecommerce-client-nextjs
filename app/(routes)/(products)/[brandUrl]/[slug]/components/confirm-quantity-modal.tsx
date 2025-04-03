@@ -1,13 +1,11 @@
 'use client'
+
 import Currency from '@/components/utilities/currency'
+import useCart from '@/hooks/use-cart'
 import { SkuDetailResponse } from '@/types/responses.type'
 import { convertJsonToAttributes } from '@/utils/convert'
-// import { ProductSkuDto } from '@/types/products.type'
-//import { User } from '@/types/users.type'
 import { Button, Chip, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/react'
-import axios from 'axios'
 import { MinusCircleIcon, PlusCircleIcon } from 'lucide-react'
-// import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
@@ -17,7 +15,6 @@ interface ConfirmQuantityModalProps {
   onOpenChange(): void
   quantity: number
   setQuantity(quantity: number): void
-  // user: User | null
 }
 
 const ConfirmQuantityModal: React.FC<ConfirmQuantityModalProps> = ({
@@ -26,34 +23,22 @@ const ConfirmQuantityModal: React.FC<ConfirmQuantityModalProps> = ({
   onOpenChange,
   quantity,
   setQuantity
-  // user
 }) => {
-  // const { user } = useAuthContext()
   const [totalPrice, setTotalPrice] = useState<number>(0)
-  // const router = useRouter()
+  const cart = useCart()
+
   useEffect(() => {
     if (skuDetailSelected) {
       setTotalPrice(skuDetailSelected.sellingPrice * quantity)
     }
   }, [quantity, skuDetailSelected])
 
-  const onAddToCart = async () => {
-    // if (!user) {
-    //   toast.error('Bạn cần đăng nhập để mua hàng.')
-    //   router.push('/login')
-    //   return
-    // }
-
+  const onAddToCart = () => {
     if (quantity > skuDetailSelected?.stock) {
       toast.error('Bạn đã thêm quá số lượng hiện có ở cửa hàng.')
     } else {
-      // call api add to cart
-      const cart = await axios.post('/api/cart', {
-        productSkuId: skuDetailSelected.id,
-        quantity
-      })
-      console.log(cart)
-      toast.success('Bạn đã thêm thành công.')
+      cart.addItem(skuDetailSelected, quantity)
+      onOpenChange()
     }
   }
 
@@ -107,13 +92,6 @@ const ConfirmQuantityModal: React.FC<ConfirmQuantityModalProps> = ({
               <div className='mt-3 flex items-center justify-between'>
                 <h3 className='font-semibold '>Đơn giá:</h3>
                 <Currency value={skuDetailSelected?.sellingPrice} />
-              </div>
-              <hr className='my-4' />
-              <div className='flex flex-col '>
-                <div className='flex items-center justify-between gap-x-4'>
-                  <h3 className='font-semibold '>Đơn vị mua hàng:</h3>
-                  <div>{'cái'}</div>
-                </div>
               </div>
               <hr className='my-4' />
               <div className='flex flex-col '>

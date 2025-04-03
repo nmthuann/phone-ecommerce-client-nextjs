@@ -1,20 +1,27 @@
 'use client'
-import React, { FC, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { PackageCheckIcon } from 'lucide-react'
 import Currency from '@/components/utilities/currency'
 import { Button } from '@heroui/react'
-import { Cart } from '@/types/orders.type'
+// import { Cart } from '@/types/orders.type'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import LoadingOverlay from '@/components/loading-overlay'
+import useCart from '@/hooks/use-cart'
 
-interface CartSummaryProps {
-  data: Cart
-}
+// interface CartSummaryProps {
+//   data: Cart
+// } : FC<CartSummaryProps>
 
-const CartSummary: FC<CartSummaryProps> = ({ data }) => {
+const CartSummary = () => {
+  // const cart = useCart()
+  const items = useCart(state => state.items)
+  // const removeAll = useCart(state => state.removeAll)
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+
+  // const router = useRouter()
+  // const [loading, setLoading] = useState(false)
   const onConfirmOrder = () => {
     try {
       setLoading(true)
@@ -28,34 +35,33 @@ const CartSummary: FC<CartSummaryProps> = ({ data }) => {
     }
   }
 
+  const totalPrice = useMemo(() => {
+    return items.reduce((total, item) => total + Number(item.sku.sellingPrice) * item.cartQuantity, 0)
+  }, [items])
+
   return (
     <div className='mt-16 rounded-lg  px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8 '>
       <h2 className='text-lg font-medium '>Giá trị đơn hàng</h2>
       <div className='mt-6 space-y-4'>
         <div className='flex items-center justify-between border-t border-gray-200 pt-4'>
           <div className='text-base font-medium '>Tổng tiền</div>
-          <Currency value={data.totalPrice} />
+          <Currency value={totalPrice} />
         </div>
       </div>
-      {loading ? (
-        // <Button disabled className='w-full'>
-        //   <Loader2 className='animate-spin' />
-        //   Please wait
-        // </Button>
-        <LoadingOverlay />
-      ) : (
-        <Button
-          onPress={onConfirmOrder}
-          isDisabled={data.totalItems === 0}
-          className='w-full mt-6 font-medium 
+
+      <Button
+        onPress={onConfirmOrder}
+        isDisabled={items.length === 0 || loading}
+        className='w-full mt-6 font-medium 
                   bg-gradient-to-r from-red-600 to-red-800 text-white'
-          isLoading={loading}
-          startContent={<PackageCheckIcon />}
-          variant='shadow'
-        >
-          Xác nhận đơn hàng
-        </Button>
-      )}
+        isLoading={loading}
+        startContent={<PackageCheckIcon />}
+        variant='shadow'
+      >
+        Xác nhận đơn hàng
+      </Button>
+
+      <LoadingOverlay loading={loading} />
     </div>
   )
 }

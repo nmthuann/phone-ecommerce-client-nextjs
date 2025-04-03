@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { User } from '@/types/users.type'
 import { Input } from '@heroui/react'
 import { ErrorInput } from '@/constants/errors.enum'
 
@@ -39,24 +38,14 @@ const formSchema = z.object({
     })
 })
 
-interface CustomerOrderFormProps {
-  customer: User | null
-}
-
-export const CustomerOrderForm: React.FC<CustomerOrderFormProps> = ({ customer }) => {
+export const CustomerOrderForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: customer
-      ? {
-          email: customer.email,
-          fullName: `${customer.lastName} ${customer.firstName}`,
-          phone: customer.phone
-        }
-      : {
-          email: '',
-          fullName: '',
-          phone: ''
-        }
+    defaultValues: {
+      email: '',
+      fullName: '',
+      phone: ''
+    }
   })
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)

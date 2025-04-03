@@ -1,22 +1,16 @@
 import { getLocation } from '@/actions/get-location'
-import { getCart } from '@/actions/get-cart'
-import OrderInformation from './components/order-information'
-import CheckoutInformation from './components/checkout-information'
+// import { getCart } from '@/actions/get-cart'
+// import OrderInformation from './components/order-information'
+// import CheckoutInformation from './components/checkout-information'
 import { Divider } from '@heroui/react'
 import Footer from '@/components/layouts/footer'
+import Checkout from './components/checkout'
 
 const PaymentPage = async () => {
   const location = await getLocation()
-  const cart = await getCart()
   return (
     <div>
-      <div
-        className='flex flex-col md:flex-row h-auto mt-5 mb-5 ml-2 mr-2
-              rounded-3xl border-none space-x-4'
-      >
-        <OrderInformation data={cart} location={location} />
-        <CheckoutInformation data={cart} />
-      </div>
+      <Checkout location={location} />
       <Divider />
       <Footer />
     </div>

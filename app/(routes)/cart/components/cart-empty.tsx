@@ -3,7 +3,7 @@ import { Button } from '@heroui/react'
 import { KanbanSquareDashed, Undo } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
-const CartNotFound = () => {
+const CartEmpty = () => {
   const router = useRouter()
   return (
     <div className='col-span-full text-center flex flex-col items-center justify-center py-20'>
@@ -22,4 +22,4 @@ const CartNotFound = () => {
   )
 }
 
-export default CartNotFound
+export default CartEmpty

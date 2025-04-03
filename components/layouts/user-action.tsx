@@ -1,35 +1,33 @@
 'use client'
-import { useAuthContext } from '@/providers/auth-provider'
-import { User } from '@/types/users.type'
+// import { useAuthContext } from '@/providers/auth-provider'
+// import { User } from '@/types/users.type'
 import { Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react'
 
-import axios from 'axios'
+// import axios from 'axios'
 import { CircleHelp, Heart, LogOut, MapPin, Package } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import toast from 'react-hot-toast'
+// import { useRouter } from 'next/navigation'
+// import toast from 'react-hot-toast'
 
-interface UserActionProps {
-  user: User
-}
+import avtImg from '../../public/avatars/02.png'
 
-export const UserAction: React.FC<UserActionProps> = ({ user }) => {
-  const { handleLogout } = useAuthContext()
-  const router = useRouter()
+export const UserAction = () => {
+  // const { handleLogout } = useAuthContext()
+  // const router = useRouter()
 
-  if (!user) {
-    return null
-  }
+  // if (!user) {
+  //   return null
+  // }
 
   async function handleOnClickLogout() {
-    try {
-      const res = await axios.post('/api/auth/logout')
-      toast.success(res.data.message)
-      handleLogout()
-      router.push('/')
-    } catch (error: unknown) {
-      console.log('error:::', error)
-      toast.error('Đăng xuất thất bại.')
-    }
+    // try {
+    //   const res = await axios.post('/api/auth/logout')
+    //   toast.success(res.data.message)
+    //   handleLogout()
+    //   router.push('/')
+    // } catch (error: unknown) {
+    //   console.log('error:::', error)
+    //   toast.error('Đăng xuất thất bại.')
+    // }
   }
 
   const iconClasses = 'text-xl text-default-500 pointer-events-none flex-shrink-0'
@@ -41,13 +39,13 @@ export const UserAction: React.FC<UserActionProps> = ({ user }) => {
           as='button'
           isBordered
           className=' transition-transform  w-9 h-9 text-tiny rounded-full border-2 shadow-md dark:bg-slate-900 bg-white dark:border-slate-400'
-          src={user.avatarUrl}
+          src={avtImg.src}
           showFallback
         />
       </DropdownTrigger>
       <DropdownMenu aria-label='Profile Actions' variant='flat'>
         <DropdownItem key='introduce' className='h-14 gap-0'>
-          <p className='font-semibold'>Chào, {user.firstName}</p>
+          <p className='font-semibold'>Chào Bạn</p>
         </DropdownItem>
         <DropdownItem key='accounts' href='/accounts'>
           Thông tin các nhân

@@ -11,6 +11,7 @@ const PaymentMethodForm = () => {
   const handleCheckboxChange = (method: unknown) => {
     setSelectedMethod(method as string)
   }
+
   return (
     <div className='w-full space-y-2'>
       <Checkbox

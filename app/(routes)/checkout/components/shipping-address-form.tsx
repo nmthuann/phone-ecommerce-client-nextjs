@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
-import { useAuthContext } from '@/providers/auth-provider'
 import { City, District, Ward } from '@/types/location.type'
 import { Input, Select, SelectItem } from '@heroui/react'
 import { ErrorInput } from '@/constants/errors.enum'
@@ -19,7 +18,7 @@ interface ShippingAddressFormProps {
 }
 
 export const ShippingAddressForm: React.FC<ShippingAddressFormProps> = ({ location }) => {
-  const { user } = useAuthContext()
+  // const { user } = useAuthContext()
   const [city, setCity] = useState<string>('')
   const [districtList, setDistrictList] = useState<District[]>([])
   const [district, setDistrict] = useState<string>('')
