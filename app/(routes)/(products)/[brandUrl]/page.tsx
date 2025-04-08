@@ -30,9 +30,7 @@ const BrandPage = async ({ params }: { params: Promise<{ brandUrl: string }> }) 
     )
   } catch (error: unknown) {
     console.error(error)
-    return (
-      <ErrorComponent title='Category Page' message='Failed to load Categories or Products. Please try again later.' />
-    )
+    return <ErrorComponent title='Brand Page' message='Failed to load Brands or Products. Please try again later.' />
   }
 }
 

@@ -34,3 +34,10 @@ export type ProductSku = {
 
 export type ProductWithBrand = Product & Brand
 export type ProductWithBrandAndProductSku = Product & Brand & ProductSku
+
+export type SearchProductResponse = {
+  id: string
+  productName: string
+  slug: string
+  brandUrl: string
+}
