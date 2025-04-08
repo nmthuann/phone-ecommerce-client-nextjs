@@ -1,15 +1,13 @@
 'use client'
+
 import { Button, Input, Listbox, ListboxItem } from '@heroui/react'
 import { ArrowDownIcon, ArrowUpIcon, History, SearchIcon, X } from 'lucide-react'
 import { JSX, useEffect, useState } from 'react'
 import { SearchListBoxWrapper } from './search-listbox-wrapper'
-// import { useRouter } from 'next/navigation'
 import { SearchProductResponse } from '@/types/products.type'
 import { searchSkusByName } from '@/actions/search-skus-by-name'
 
 const SearchBar = () => {
-  // const router = useRouter()
-
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [isArrowUp, setIsArrowUp] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
