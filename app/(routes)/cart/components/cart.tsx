@@ -27,7 +27,7 @@ const Cart = () => {
             {cart.items.length === 0 && <CartEmpty />}
             <ul>
               {cart.items.map(item => (
-                <CartItem key={item.sku.id || 0} data={item.sku} currentQuantity={item.cartQuantity} />
+                <CartItem key={item.id || 0} data={item} />
               ))}
               <Divider />
             </ul>

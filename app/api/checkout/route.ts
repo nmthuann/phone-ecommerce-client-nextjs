@@ -6,7 +6,8 @@ export async function POST(req: Request) {
   try {
     const body = await req.json()
 
-    const { firstName, lastName, email, contactPhone, shippingAddress, paymentMethod, shippingMethod, cart } = body
+    const { firstName, lastName, email, contactPhone, shippingAddress, paymentMethod, shippingMethod, note, cart } =
+      body
 
     if (!firstName) {
       return new NextResponse('firstName', { status: 400 })
@@ -48,6 +49,7 @@ export async function POST(req: Request) {
       shippingAddress,
       paymentMethod,
       shippingMethod,
+      note: note,
       cart
     })
 

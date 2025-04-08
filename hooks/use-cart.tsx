@@ -1,76 +1,58 @@
 'use client'
+
 import { create } from 'zustand'
 import { toast } from 'react-hot-toast'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import { SkuDetailResponse } from '@/types/responses.type'
 
+/**
+ * @description
+ * Cart store using Zustand and localStorage for persistence.
+ * Chỉ thêm một sản phẩm duy nhất vào giỏ hàng.
+ * Đây là sản phẩm điện tử sẽ được quản lý bởi serial
+ * 1. Việc chỉ thêm một sản phẩm duy nhất vào giỏ hàng sẽ giúp cho việc quản lý sản phẩm dễ dàng hơn.
+ * 2. Tránh spam sản phẩm, hoặc mua nhiều sản phẩm để giữ lại bán với giá cao hơn.
+ */
 interface CartStore {
-  items: { sku: SkuDetailResponse; cartQuantity: number }[]
-  addItem: (newItem: SkuDetailResponse, quantity: number) => void
+  items: SkuDetailResponse[]
+  addItem: (newItem: SkuDetailResponse) => void
   removeItem: (id: number) => void
   removeAll: () => void
-  updateQuantity: (id: number, newQuantity: number) => void
 }
 
 const useCart = create(
   persist<CartStore>(
     (set, get) => ({
       items: [],
-      addItem: (newItem: SkuDetailResponse, quantity: number) => {
-        // item không phù hợp
+      addItem: (newItem: SkuDetailResponse) => {
         if (!newItem || typeof newItem.id !== 'number') {
           toast.error('Sản phẩm không phù hợp.')
-        }
-        // cart đầy
-        if (get().items.length >= 5) {
-          toast.error('Giỏ hàng đầy!. Vui lòng thanh toán trước khi thêm.')
+          return
         }
 
-        const currentCart = get().items
-        const existItemIndex = currentCart.findIndex(item => item.sku.id === newItem.id)
+        const currentItems = get().items
+        const exists = currentItems.some(item => item.id === newItem.id)
 
-        // Item already in cart, increment cartQuantity
-        if (existItemIndex !== -1) {
-          set(state => {
-            const updateCart = [...state.items]
-            updateCart[existItemIndex].cartQuantity += quantity
-            return { items: updateCart }
-          })
+        if (exists) {
+          toast.error('Sản phẩm đã có trong giỏ hàng.')
+          return
         }
-        // Item not in cart, add to items array with cartQuantity of 1
-        else {
-          set(state => {
-            return {
-              items: [
-                ...state.items,
-                {
-                  sku: newItem,
-                  cartQuantity: quantity
-                }
-              ]
-            }
-          })
+
+        if (currentItems.length >= 5) {
+          toast.error('Giỏ hàng đầy! Vui lòng thanh toán trước khi thêm.')
+          return
         }
-        toast.success(`${newItem.skuName} đã được thêm vào giỏ hàng`)
+
+        set({ items: [...currentItems, newItem] })
+        toast.success(`${newItem.skuName} đã được thêm vào giỏ hàng.`)
       },
       removeItem: (id: number) => {
         set({
-          items: [...get().items.filter(item => item.sku.id !== id)]
+          items: get().items.filter(item => item.id !== id)
         })
-        toast.success('Đã xóa sản phẩm ra khỏi giỏ hàng.')
+        toast.success('Đã xóa sản phẩm khỏi giỏ hàng.')
       },
-      removeAll: () => set({ items: [] }),
-      updateQuantity: (id: number, newQuantity: number) => {
-        set(state => {
-          const updateItems = state.items.map(item => {
-            if (item.sku.id === id) {
-              return { ...item, cartQuantity: newQuantity }
-            }
-            return item
-          })
-          return { items: updateItems }
-        })
-      }
+      removeAll: () => set({ items: [] })
     }),
     {
       name: 'cart-storage',
@@ -78,4 +60,5 @@ const useCart = create(
     }
   )
 )
+
 export default useCart

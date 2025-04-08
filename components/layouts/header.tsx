@@ -9,10 +9,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { ThemeToggle } from './theme-toggle'
 import UserAction from './user-action'
-import { useState } from 'react'
 import useCart from '@/hooks/use-cart'
-import LoadingOverlay from '../loading-overlay'
-// import { useAuthContext } from '@/providers/auth-provider'
 
 const insights: string[] = [
   '1000+ Sản phẩm đa dạng 🛒',
@@ -28,7 +25,13 @@ const categories = [
   { label: 'Apple', href: '/apple' },
   { label: 'Samsung', href: '/samsung' },
   { label: 'Oppo', href: '/oppo' },
-  { label: 'Xiaomi', href: '/xiaomi' }
+  { label: 'Xiaomi', href: '/xiaomi' },
+  { label: 'Realme', href: '/realme' },
+  { label: 'Nokia', href: '/nokia' },
+  { label: 'Sony', href: '/sony' },
+  { label: 'Huawei', href: '/huawei' },
+  { label: 'Motorola', href: '/motorola' },
+  { label: 'Google', href: '/google' }
 ]
 
 export const Header: React.FC = () => {

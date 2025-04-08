@@ -3,25 +3,16 @@ import React, { useMemo, useState } from 'react'
 import { PackageCheckIcon } from 'lucide-react'
 import Currency from '@/components/utilities/currency'
 import { Button } from '@heroui/react'
-// import { Cart } from '@/types/orders.type'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import LoadingOverlay from '@/components/loading-overlay'
 import useCart from '@/hooks/use-cart'
 
-// interface CartSummaryProps {
-//   data: Cart
-// } : FC<CartSummaryProps>
-
 const CartSummary = () => {
-  // const cart = useCart()
   const items = useCart(state => state.items)
-  // const removeAll = useCart(state => state.removeAll)
   const router = useRouter()
   const [loading, setLoading] = useState(false)
 
-  // const router = useRouter()
-  // const [loading, setLoading] = useState(false)
   const onConfirmOrder = () => {
     try {
       setLoading(true)
@@ -36,7 +27,7 @@ const CartSummary = () => {
   }
 
   const totalPrice = useMemo(() => {
-    return items.reduce((total, item) => total + Number(item.sku.sellingPrice) * item.cartQuantity, 0)
+    return items.reduce((total, item) => total + Number(item.sellingPrice) * 1, 0)
   }, [items])
 
   return (

@@ -2,24 +2,26 @@
 
 import { useState } from 'react'
 import { CheckCircle } from 'lucide-react'
-import { Button, Chip, useDisclosure } from '@heroui/react'
+import { Button, Chip } from '@heroui/react'
 import { SkuOptionCheckbox } from './sku-option-checkbox'
-import ConfirmQuantityModal from './confirm-quantity-modal'
-// import { User } from '@/types/users.type'
 import { ProductDetailResponse, SkuDetailResponse } from '@/types/responses.type'
+import useCart from '@/hooks/use-cart'
 
 interface ProductDetailProps {
   product: ProductDetailResponse
-  // user: User | null
 }
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
   const [selectedOption, setSelectedOption] = useState<SkuDetailResponse>(product.sku[0])
-  const [quantity, setQuantity] = useState(1)
-  const { isOpen, onOpen, onOpenChange } = useDisclosure()
+
+  const cart = useCart()
+
   const handleOptionChange = (option: SkuDetailResponse) => {
     setSelectedOption(option)
-    setQuantity(1)
+  }
+
+  const onClickAddToCart = () => {
+    cart.addItem(selectedOption)
   }
 
   return (
@@ -63,19 +65,11 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
           size='lg'
           className='w-full bg-gradient-to-r from-red-600 to-red-900 text-white
           font-medium duration-300 transition-opacity'
-          onPress={onOpen}
+          onPress={onClickAddToCart}
           isDisabled={product.sku.length == 0}
         >
-          Xác nhận số lượng
+          Thêm vào giỏ hàng
         </Button>
-        <ConfirmQuantityModal
-          skuDetailSelected={selectedOption}
-          isOpen={isOpen}
-          onOpenChange={onOpenChange}
-          quantity={quantity}
-          setQuantity={setQuantity}
-          // user={user}
-        />
       </div>
     </div>
   )

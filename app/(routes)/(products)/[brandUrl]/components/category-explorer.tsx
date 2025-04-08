@@ -69,22 +69,6 @@ const CategoryExplorer: React.FC<CategoryComponentProps> = ({ brand, products })
         </Breadcrumbs>
       </div>
 
-      {/* Tabs và nội dung
-      <div className=' shadow-lg rounded-xl p-4 md:p-6'>
-        <Tabs aria-label='Danh sách thương hiệu' items={brands} variant='underlined'>
-          {brand => (
-            <Tab key={brand.id} title={brand.brandName}>
-              <Card className='mt-4'>
-                <CardBody>
-                  <h3 className='text-xl font-semibold'>{brand.brandName}</h3>
-                  <p className='text-gray-600 mt-2'>{brand.description}</p>
-                </CardBody>
-              </Card>
-            </Tab>
-          )}
-        </Tabs>
-      </div> */}
-
       {/* BỘ LỌC + CARD SẢN PHẨM  */}
       <div className='mt-10 flex flex-row items-start justify-center gap-6'>
         <div className='hidden md:block w-64'>
@@ -92,21 +76,6 @@ const CategoryExplorer: React.FC<CategoryComponentProps> = ({ brand, products })
         </div>
 
         <div className='flex-1 ml-4'>
-          {/* Lọc theo hãng */}
-          {/* <div className='m-2 flex flex-row items-center gap-3'>
-            <p className='text-sm font-medium text-slate-500'>Lọc nhanh:</p>
-            <Dropdown>
-              <DropdownTrigger>
-                <Button variant='bordered' className='px-4 py-2' endContent={<ChevronDown />}>
-                  Hãng sản xuất
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu aria-label='Chọn hãng sản xuất' items={brands}>
-                {brand => <DropdownItem key={brand.brandAbbreviation}>{brand.brandName}</DropdownItem>}
-              </DropdownMenu>
-            </Dropdown>
-          </div> */}
-
           {/* Số lượng + hiển thị theo tiêu chí */}
           <div className='flex flex-row items-center justify-between'>
             <p className='ml-2 text-sm font-medium'>

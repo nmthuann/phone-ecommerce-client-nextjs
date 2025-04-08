@@ -1,7 +1,6 @@
 'use client'
-import { toast } from 'react-hot-toast'
-import { MinusCircleIcon, PlusCircleIcon, Trash2 } from 'lucide-react'
-import { useState } from 'react'
+
+import { Trash2 } from 'lucide-react'
 import { Button, Chip, Image } from '@heroui/react'
 import Currency from '@/components/utilities/currency'
 import { SkuDetailResponse } from '@/types/responses.type'
@@ -10,45 +9,42 @@ import useCart from '@/hooks/use-cart'
 
 interface CartItemProps {
   data: SkuDetailResponse
-  currentQuantity: number
 }
 
-const CartItem: React.FC<CartItemProps> = ({ data, currentQuantity }) => {
+const CartItem: React.FC<CartItemProps> = ({ data }) => {
   const cart = useCart()
-  const [quantityInCart, setQuantityInCart] = useState(currentQuantity)
   const onRemove = () => {
-    // console.log('Handle On Remove')
     cart.removeItem(data.id)
   }
 
-  const increaseQuantity = () => {
-    const newQuantity = quantityInCart + 1
+  // const increaseQuantity = () => {
+  //   const newQuantity = quantityInCart + 1
 
-    if (newQuantity > 5) {
-      toast.error(`Số lượng tối đa có thể mua là 5.`)
-      return
-    }
+  //   if (newQuantity > 5) {
+  //     toast.error(`Số lượng tối đa có thể mua là 5.`)
+  //     return
+  //   }
 
-    if (newQuantity > data.stock) {
-      toast.error(`Số lượng tồn kho chỉ còn ${data.stock}.`)
-      return
-    }
+  //   if (newQuantity > data.stock) {
+  //     toast.error(`Số lượng tồn kho chỉ còn ${data.stock}.`)
+  //     return
+  //   }
 
-    setQuantityInCart(newQuantity)
-    cart.updateQuantity(data.id, newQuantity)
-    toast.success(`Tăng số lượng thành công.`)
-  }
+  //   setQuantityInCart(newQuantity)
+  //   cart.updateQuantity(data.id, newQuantity)
+  //   toast.success(`Tăng số lượng thành công.`)
+  // }
 
-  const decreaseQuantity = () => {
-    if (quantityInCart > 1) {
-      const newQuantity = quantityInCart - 1
-      setQuantityInCart(newQuantity)
-      cart.updateQuantity(data.id, newQuantity)
-      toast.success(`Giảm số lượng thành công.`)
-    } else {
-      toast.error(`Số lượng tối thiểu là 1.`)
-    }
-  }
+  // const decreaseQuantity = () => {
+  //   if (quantityInCart > 1) {
+  //     const newQuantity = quantityInCart - 1
+  //     setQuantityInCart(newQuantity)
+  //     cart.updateQuantity(data.id, newQuantity)
+  //     toast.success(`Giảm số lượng thành công.`)
+  //   } else {
+  //     toast.error(`Số lượng tối thiểu là 1.`)
+  //   }
+  // }
 
   return (
     <li className='flex flex-col sm:flex-row py-6 border-bborder-gray-200 p-4'>
@@ -70,7 +66,7 @@ const CartItem: React.FC<CartItemProps> = ({ data, currentQuantity }) => {
           <div>
             <h2 className='text-lg font-semibold '>{`${data.skuName}`}</h2>
             <div className='flex flex-col sm:flex-row text-sm text-gray-500 mt-1'>
-              <p> {`Số lượng mua: ${quantityInCart}`}</p>
+              <p> {`Số lượng mua: ${1}`}</p>
 
               <p className='sm:ml-4 sm:border-l sm:border-gray-200 sm:pl-4'>{`Đơn vị mua: Chiếc.`}</p>
             </div>
@@ -97,15 +93,15 @@ const CartItem: React.FC<CartItemProps> = ({ data, currentQuantity }) => {
           <div className='flex items-center justify-between sm:justify-start sm:space-x-4'>
             <Currency value={data.sellingPrice} />
 
-            <div className='flex items-center gap-x-2'>
+            {/* <div className='flex items-center gap-x-2'>
               <Button size='sm' isIconOnly radius='full' onPress={decreaseQuantity}>
                 <MinusCircleIcon />
               </Button>
-              <div>{quantityInCart}</div>
+              <div>{1}</div>
               <Button size='sm' isIconOnly radius='full' onPress={increaseQuantity}>
                 <PlusCircleIcon />
               </Button>
-            </div>
+            </div> */}
             <Button size='md' isIconOnly color='danger' className='ml-2' onPress={onRemove}>
               <Trash2 size={20} />
             </Button>

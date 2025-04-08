@@ -17,7 +17,6 @@ const formatter = new Intl.NumberFormat('vi-VN', {
 })
 export const ProductCard: FC<ProductCardProps> = ({ product }) => {
   const router = useRouter()
-  //const pathname = usePathname()
   const [selectedSku, setSelectedSku] = useState<SkuResponse>(product.skus[0]) // Chọn SKU đầu tiên mặc định
   const [loading, setLoading] = useState<boolean>(false)
 

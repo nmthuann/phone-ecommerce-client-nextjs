@@ -23,12 +23,10 @@ import { Divider } from '@heroui/react'
 import Footer from '@/components/layouts/footer'
 import ProductPolicy from './components/policy'
 import Benefit from './components/benefit'
-// import { getUser } from '@/actions/get-profile'
 import { getBrandByUrl } from '@/actions/get-brand'
 
 const ProductPage = async ({ params }: { params: Promise<{ brandUrl: string; slug: string }> }) => {
   const { brandUrl, slug } = await params
-  // const user = await getUser()
   try {
     const brand = await getBrandByUrl(brandUrl)
     const product = await getProductBySlug(slug)
