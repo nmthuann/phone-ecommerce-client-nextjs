@@ -1,7 +1,7 @@
 'use client'
 
 import { City, District, Ward } from '@/types/location.type'
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import useCart from '@/hooks/use-cart'
 import {
   Button,
@@ -20,7 +20,7 @@ import {
   Select,
   SelectItem
 } from '@heroui/react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { ChevronLeft, ChevronRight, HandCoins } from 'lucide-react'
 import { OrderItem } from './order-item'
 
@@ -114,6 +114,19 @@ const Checkout: FC<CheckoutProps> = ({ location }) => {
       note: ''
     }
   })
+
+  const searchParams = useSearchParams()
+  const removeAll = useCart(state => state.removeAll)
+  useEffect(() => {
+    if (searchParams.get('success')) {
+      toast.success('Đặt hàng thành công (Stripe)')
+      cart.removeAll()
+      router.replace('/') // ✅ dùng replace thay vì push để không lặp lại toast nếu refresh
+    }
+    if (searchParams.get('canceled')) {
+      toast.error('Đặt hàng thất bại (Stripe)')
+    }
+  }, [searchParams, removeAll])
 
   async function onSubmit(values: FormValues) {
     setIsSubmitting(true) // ✅ Bắt đầu loading
